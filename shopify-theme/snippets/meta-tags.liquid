@@ -15,6 +15,3 @@
 <meta name="twitter:title" content="{{ page_title | default: shop.name }}">
 <meta name="twitter:description" content="{{ page_description | default: shop.description | escape }}">
 
-{%- if template.suffix contains 'contact' -%}
-  <link rel="preload" href="{{ 'customer.js' | asset_url }}" as="script">
-{%- endif -%}
