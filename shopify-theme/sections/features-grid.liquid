@@ -1,217 +1,52 @@
-{%- style -%}
-  .features {
-    padding: 5rem 2rem;
-    background: {{ settings.color_background }};
-  }
-
-  .features__container {
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-
-  .features__header {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-
-  .features__badge {
-    display: inline-block;
-    background: {{ settings.color_primary }};
-    color: white;
-    padding: 0.5rem 1.5rem;
-    border-radius: 50px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-
-  .features__title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    color: {{ settings.color_text }};
-    margin-bottom: 1rem;
-  }
-
-  .features__subtitle {
-    font-size: 1.125rem;
-    color: #666;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .features__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-  }
-
-  .feature-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #f0f0f0;
-  }
-
-  .feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-  }
-
-  .feature-card__icon {
-    width: 64px;
-    height: 64px;
-    background: linear-gradient(135deg, {{ settings.color_primary }}, {{ settings.color_secondary }});
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-  }
-
-  .feature-card__title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: {{ settings.color_text }};
-    margin-bottom: 0.75rem;
-  }
-
-  .feature-card__description {
-    font-size: 1rem;
-    color: #666;
-    line-height: 1.6;
-  }
-
-  @media screen and (max-width: 768px) {
-    .features {
-      padding: 3rem 1rem;
-    }
-
-    .features__grid {
-      grid-template-columns: 1fr;
-    }
-  }
-{%- endstyle -%}
-
-<section class="features">
-  <div class="features__container">
-    <div class="features__header">
-      {%- if section.features_badge != blank -%}
-        <span class="features__badge">{{ section.features_badge }}</span>
-      {%- endif -%}
-      
-      <h2 class="features__title">{{ section.features_title }}</h2>
-      
-      {%- if section.features_subtitle != blank -%}
-        <p class="features__subtitle">{{ section.features_subtitle }}</p>
-      {%- endif -%}
+<section class="features-grid section">
+  <style>
+    .features-grid { background: var(--color-background); }
+    .features-grid__inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-md); }
+    .features-grid__header { text-align: center; margin-bottom: var(--spacing-xl); }
+    .features-grid__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-lg); }
+    .feature-card { padding: var(--spacing-lg); border-radius: var(--border-radius); background: var(--color-light-gray); text-align: center; transition: transform 0.2s ease; }
+    .feature-card:hover { transform: translateY(-5px); }
+    .feature-card__icon { font-size: 3rem; margin-bottom: var(--spacing-sm); }
+    .feature-card__title { font-size: 1.25rem; font-weight: 600; margin-bottom: var(--spacing-xs); color: var(--color-text); }
+    .feature-card__description { color: #666; line-height: 1.6; }
+    @media (max-width: 768px) { .features-grid__grid { grid-template-columns: 1fr; } }
+  </style>
+  <div class="features-grid__inner">
+    <div class="features-grid__header">
+      <span class="section-badge">{{ section.settings.features_badge }}</span>
+      <h2 class="section-title">{{ section.settings.features_title }}</h2>
+      <p class="section-subtitle">{{ section.settings.features_subtitle }}</p>
     </div>
-
-    <div class="features__grid">
-      {%- for block in section.blocks -%}
+    <div class="features-grid__grid">
+      {% for block in section.blocks %}
         <div class="feature-card" {{ block.shopify_attributes }}>
-          <div class="feature-card__icon">
-            {{ block.settings.icon }}
-          </div>
+          <div class="feature-card__icon">{{ block.settings.icon }}</div>
           <h3 class="feature-card__title">{{ block.settings.title }}</h3>
           <p class="feature-card__description">{{ block.settings.description }}</p>
         </div>
-      {%- endfor -%}
+      {% endfor %}
     </div>
   </div>
 </section>
-
 {% schema %}
 {
-  "name": "Features Section",
-  "tag": "section",
-  "class": "section",
+  "name": "Features Grid",
   "settings": [
-    {
-      "type": "text",
-      "id": "features_badge",
-      "label": "Badge Text",
-      "default": "Why Choose Us"
-    },
-    {
-      "type": "text",
-      "id": "features_title",
-      "label": "Heading",
-      "default": "Everything You Need to Succeed"
-    },
-    {
-      "type": "textarea",
-      "id": "features_subtitle",
-      "label": "Subheading",
-      "default": "Our comprehensive program gives you all the tools and support you need to achieve your goals."
-    }
+    {"type": "text", "id": "features_badge", "label": "Badge", "default": "Why Choose Us"},
+    {"type": "text", "id": "features_title", "label": "Title", "default": "Everything You Need to Succeed"},
+    {"type": "textarea", "id": "features_subtitle", "label": "Subtitle", "default": "Our comprehensive program gives you all the tools."}
   ],
   "blocks": [
     {
       "type": "feature",
       "name": "Feature",
       "settings": [
-        {
-          "type": "text",
-          "id": "icon",
-          "label": "Icon (Emoji)",
-          "default": "🎯"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Personalized Plan"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Description",
-          "default": "Custom-tailored approach designed specifically for your unique needs and goals."
-        }
+        {"type": "text", "id": "icon", "label": "Icon Emoji", "default": "🎯"},
+        {"type": "text", "id": "title", "label": "Title", "default": "Personalized Plan"},
+        {"type": "textarea", "id": "description", "label": "Description", "default": "Custom-tailored approach for your needs."}
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Features Section",
-      "blocks": [
-        {
-          "type": "feature",
-          "settings": {
-            "icon": "🎯",
-            "title": "Personalized Plan",
-            "description": "Custom-tailored approach designed specifically for your unique needs and goals."
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "icon": "👨‍⚕️",
-            "title": "Expert Guidance",
-            "description": "Access to certified health professionals who provide ongoing support and advice."
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "icon": "📱",
-            "title": "Mobile App Access",
-            "description": "Track your progress, log meals, and stay motivated with our intuitive mobile app."
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "icon": "👥",
-            "title": "Community Support",
-            "description": "Join thousands of members in our supportive community sharing tips and success stories."
-          }
-        }
-      ]
-    }
-  ]
+  "presets": [{"name": "Features Grid", "blocks": [{"type": "feature"}, {"type": "feature"}, {"type": "feature"}, {"type": "feature"}]}]
 }
 {% endschema %}

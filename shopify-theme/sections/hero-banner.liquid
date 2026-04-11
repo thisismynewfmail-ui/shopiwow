@@ -1,182 +1,194 @@
-{%- style -%}
-  .hero {
-    position: relative;
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, {{ settings.color_primary }} 0%, {{ settings.color_secondary }} 100%);
-    overflow: hidden;
-  }
-
-  .hero__content {
-    max-width: 800px;
-    text-align: center;
-    padding: 4rem 2rem;
-    z-index: 2;
-  }
-
-  .hero__badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.2);
-    color: white;
-    padding: 0.5rem 1.5rem;
-    border-radius: 50px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    backdrop-filter: blur(10px);
-  }
-
-  .hero__title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800;
-    color: white;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero__subtitle {
-    font-size: clamp(1.125rem, 2vw, 1.5rem);
-    color: rgba(255,255,255,0.9);
-    line-height: 1.6;
-    margin-bottom: 2.5rem;
-  }
-
-  .hero__buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .hero__button {
-    padding: 1rem 2.5rem;
-    font-size: 1.125rem;
-    font-weight: 700;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .hero__button--primary {
-    background: {{ settings.color_accent }};
-    color: white;
-  }
-
-  .hero__button--secondary {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-  }
-
-  .hero__button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  }
-
-  .hero__stats {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin-top: 4rem;
-    flex-wrap: wrap;
-  }
-
-  .hero__stat {
-    text-align: center;
-  }
-
-  .hero__stat-value {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: white;
-  }
-
-  .hero__stat-label {
-    font-size: 0.875rem;
-    color: rgba(255,255,255,0.8);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .hero__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('{{ section.settings.background_image | image_url: width: 1920 }}') center/cover no-repeat;
-    opacity: 0.1;
-    z-index: 1;
-  }
-
-  @media screen and (max-width: 768px) {
-    .hero__stats {
-      gap: 2rem;
+<section class="hero-banner">
+  <style>
+    .hero-banner {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: white;
+      padding: var(--spacing-xl) 0;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
     }
-
-    .hero__stat-value {
+    
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,165.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+      background-size: cover;
+      opacity: 0.5;
+    }
+    
+    .hero-banner__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-md);
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+    
+    .hero-banner__badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      padding: var(--spacing-xs) var(--spacing-md);
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .hero-banner__title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .hero-banner__subtitle {
+      font-size: clamp(1.125rem, 2vw, 1.25rem);
+      opacity: 0.9;
+      max-width: 600px;
+      margin-bottom: var(--spacing-lg);
+      line-height: 1.8;
+    }
+    
+    .hero-banner__buttons {
+      display: flex;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .hero-banner__btn {
+      padding: var(--spacing-md) var(--spacing-xl);
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .hero-banner__btn--primary {
+      background: white;
+      color: var(--color-primary);
+    }
+    
+    .hero-banner__btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .hero-banner__btn--secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    
+    .hero-banner__btn--secondary:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .hero-banner__stats {
+      display: flex;
+      gap: var(--spacing-xl);
+      flex-wrap: wrap;
+    }
+    
+    .hero-banner__stat {
+      text-align: center;
+    }
+    
+    .hero-banner__stat-value {
       font-size: 2rem;
+      font-weight: 800;
+      display: block;
     }
-  }
-{%- endstyle -%}
-
-<section class="hero">
-  {%- if section.settings.background_image != blank -%}
-    <div class="hero__overlay"></div>
-  {%- endif -%}
-
-  <div class="hero__content">
-    {%- if section.settings.badge_text != blank -%}
-      <span class="hero__badge">{{ section.settings.badge_text }}</span>
-    {%- endif -%}
-
-    <h1 class="hero__title">{{ section.settings.title }}</h1>
-    <p class="hero__subtitle">{{ section.settings.subtitle }}</p>
-
-    <div class="hero__buttons">
-      {%- if section.settings.button_primary_text != blank and section.settings.button_primary_link != blank -%}
-        <a href="{{ section.settings.button_primary_link }}" class="hero__button hero__button--primary">
+    
+    .hero-banner__stat-label {
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-banner {
+        min-height: auto;
+        padding: var(--spacing-xl) 0;
+      }
+      
+      .hero-banner__stats {
+        justify-content: center;
+      }
+      
+      .hero-banner__buttons {
+        justify-content: center;
+      }
+      
+      .hero-banner__title,
+      .hero-banner__subtitle {
+        text-align: center;
+      }
+      
+      .hero-banner__badge {
+        display: block;
+        text-align: center;
+      }
+    }
+  </style>
+  
+  <div class="hero-banner__inner">
+    {% if section.settings.badge_text != blank %}
+      <span class="hero-banner__badge">{{ section.settings.badge_text }}</span>
+    {% endif %}
+    
+    <h1 class="hero-banner__title">{{ section.settings.title }}</h1>
+    <p class="hero-banner__subtitle">{{ section.settings.subtitle }}</p>
+    
+    <div class="hero-banner__buttons">
+      {% if section.settings.button_primary_text != blank and section.settings.button_primary_url != blank %}
+        <a href="{{ section.settings.button_primary_url }}" class="hero-banner__btn hero-banner__btn--primary">
           {{ section.settings.button_primary_text }}
         </a>
-      {%- endif -%}
-
-      {%- if section.settings.button_secondary_text != blank and section.settings.button_secondary_link != blank -%}
-        <a href="{{ section.settings.button_secondary_link }}" class="hero__button hero__button--secondary">
+      {% endif %}
+      
+      {% if section.settings.button_secondary_text != blank and section.settings.button_secondary_url != blank %}
+        <a href="{{ section.settings.button_secondary_url }}" class="hero-banner__btn hero-banner__btn--secondary">
           {{ section.settings.button_secondary_text }}
         </a>
-      {%- endif -%}
+      {% endif %}
     </div>
-
-    {%- if section.settings.show_stats -%}
-      <div class="hero__stats">
-        {%- for i in (1..3) -%}
-          {%- assign stat_value = 'stat_' | append: i | append: '_value' -%}
-          {%- assign stat_label = 'stat_' | append: i | append: '_label' -%}
-          {%- if section.settings[stat_value] != blank -%}
-            <div class="hero__stat">
-              <div class="hero__stat-value">{{ section.settings[stat_value] }}</div>
-              <div class="hero__stat-label">{{ section.settings[stat_label] }}</div>
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
+    
+    {% if section.settings.show_stats %}
+      <div class="hero-banner__stats">
+        <div class="hero-banner__stat">
+          <span class="hero-banner__stat-value">{{ section.settings.stat_1_value }}</span>
+          <span class="hero-banner__stat-label">{{ section.settings.stat_1_label }}</span>
+        </div>
+        <div class="hero-banner__stat">
+          <span class="hero-banner__stat-value">{{ section.settings.stat_2_value }}</span>
+          <span class="hero-banner__stat-label">{{ section.settings.stat_2_label }}</span>
+        </div>
+        <div class="hero-banner__stat">
+          <span class="hero-banner__stat-value">{{ section.settings.stat_3_value }}</span>
+          <span class="hero-banner__stat-label">{{ section.settings.stat_3_label }}</span>
+        </div>
       </div>
-    {%- endif -%}
+    {% endif %}
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Hero Section",
-  "tag": "section",
-  "class": "section",
+  "name": "Hero Banner",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Background Image"
-    },
     {
       "type": "text",
       "id": "badge_text",
@@ -186,13 +198,13 @@
     {
       "type": "text",
       "id": "title",
-      "label": "Heading",
+      "label": "Title",
       "default": "Transform Your Health Journey"
     },
     {
       "type": "textarea",
       "id": "subtitle",
-      "label": "Subheading",
+      "label": "Subtitle",
       "default": "Science-backed weight loss program designed by experts. Join thousands who have already transformed their lives."
     },
     {
@@ -203,8 +215,8 @@
     },
     {
       "type": "url",
-      "id": "button_primary_link",
-      "label": "Primary Button Link"
+      "id": "button_primary_url",
+      "label": "Primary Button URL"
     },
     {
       "type": "text",
@@ -214,13 +226,13 @@
     },
     {
       "type": "url",
-      "id": "button_secondary_link",
-      "label": "Secondary Button Link"
+      "id": "button_secondary_url",
+      "label": "Secondary Button URL"
     },
     {
       "type": "checkbox",
       "id": "show_stats",
-      "label": "Show Statistics",
+      "label": "Show Stats",
       "default": true
     },
     {
@@ -258,11 +270,6 @@
       "id": "stat_3_label",
       "label": "Stat 3 Label",
       "default": "Expert Support"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Hero Section"
     }
   ]
 }

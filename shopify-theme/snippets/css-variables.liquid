@@ -1,118 +1,13 @@
-{%- style -%}
-  .sr-only {
-    position: absolute !important;
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-    width: 1px;
-    height: 1px;
-    word-wrap: normal;
+<style>
+  :root {
+    --color-primary: {{ settings.color_primary }};
+    --color-secondary: {{ settings.color_secondary }};
+    --color-accent: {{ settings.color_accent }};
+    --color-background: {{ settings.color_background }};
+    --color-text: {{ settings.color_text }};
+    
+    --font-heading: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+    --font-body: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
   }
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
-    font-size: 16px;
-    line-height: 1.6;
-    color: {{ settings.color_text }};
-    background-color: {{ settings.color_background }};
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-
-  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
-  h2 { font-size: clamp(1.75rem, 4vw, 3rem); }
-  h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
-  h4 { font-size: clamp(1.25rem, 2vw, 1.75rem); }
-
-  a {
-    color: {{ settings.color_primary }};
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  a:hover {
-    color: {{ settings.color_secondary }};
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  button {
-    font-family: inherit;
-    cursor: pointer;
-  }
-
-  .container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-
-  .section {
-    padding: 4rem 0;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    border: none;
-    cursor: pointer;
-  }
-
-  .btn--primary {
-    background: {{ settings.color_primary }};
-    color: white;
-  }
-
-  .btn--primary:hover {
-    background: {{ settings.color_secondary }};
-  }
-
-  .btn--secondary {
-    background: transparent;
-    color: {{ settings.color_primary }};
-    border: 2px solid {{ settings.color_primary }};
-  }
-
-  .btn--secondary:hover {
-    background: {{ settings.color_primary }};
-    color: white;
-  }
-
-  .btn--accent {
-    background: {{ settings.color_accent }};
-    color: white;
-  }
-
-  .btn--accent:hover {
-    opacity: 0.9;
-  }
-
-  @media screen and (max-width: 768px) {
-    .container {
-      padding: 0 1rem;
-    }
-
-    .section {
-      padding: 2.5rem 0;
-    }
-  }
-{%- endstyle -%}
+</style>
+{{ 'base.css' | asset_url | stylesheet_tag }}

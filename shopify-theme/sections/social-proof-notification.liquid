@@ -1,167 +1,42 @@
-{%- style -%}
-  .social-proof-notification {
-    position: fixed;
-    bottom: 2rem;
-    left: 2rem;
-    background: white;
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    z-index: 999;
-    transform: translateY(150%);
-    opacity: 0;
-    transition: transform 0.4s ease, opacity 0.4s ease;
-    max-width: 350px;
-  }
-
-  .social-proof-notification.show {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  .social-proof-notification__image {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-    background: {{ settings.color_primary }};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 700;
-    font-size: 1.25rem;
-  }
-
-  .social-proof-notification__content {
-    flex: 1;
-  }
-
-  .social-proof-notification__text {
-    font-size: 0.875rem;
-    color: {{ settings.color_text }};
-    margin: 0;
-  }
-
-  .social-proof-notification__text strong {
-    color: {{ settings.color_primary }};
-  }
-
-  .social-proof-notification__time {
-    font-size: 0.75rem;
-    color: #999;
-    margin-top: 0.25rem;
-  }
-
-  @media screen and (max-width: 768px) {
-    .social-proof-notification {
-      bottom: 1rem;
-      left: 1rem;
-      right: 1rem;
-      max-width: none;
-    }
-  }
-{%- endstyle -%}
-
-{%- if section.settings.enable_social_proof -%}
-  <div class="social-proof-notification" id="socialProofNotification">
-    <div class="social-proof-notification__image" id="notificationImage">🎉</div>
-    <div class="social-proof-notification__content">
-      <p class="social-proof-notification__text" id="notificationText">
-        <strong>Sarah M.</strong> just subscribed to the program!
-      </p>
-      <p class="social-proof-notification__time">Just now</p>
+<div class="social-proof-notification" id="social-proof" style="display:none;">
+  <style>
+    .social-proof-notification { position: fixed; bottom: 20px; left: 20px; background: white; padding: var(--spacing-md); border-radius: var(--border-radius); box-shadow: var(--shadow-lg); z-index: 9999; max-width: 300px; animation: slideIn 0.5s ease; }
+    @keyframes slideIn { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    .social-proof-notification__icon { font-size: 1.5rem; margin-right: var(--spacing-sm); }
+    .social-proof-notification__content { display: flex; align-items: center; gap: var(--spacing-sm); }
+    .social-proof-notification__text { font-size: 0.875rem; color: var(--color-text); }
+    .social-proof-notification__time { font-size: 0.75rem; color: #999; margin-top: 4px; }
+  </style>
+  <div class="social-proof-notification__content">
+    <span class="social-proof-notification__icon">🎉</span>
+    <div>
+      <p class="social-proof-notification__text"><strong id="sp-name">Sarah M.</strong> from <span id="sp-location">Texas</span> just subscribed!</p>
+      <p class="social-proof-notification__time" id="sp-time">2 minutes ago</p>
     </div>
   </div>
-
   <script>
     (function() {
-      const names = [
-        'Sarah M.', 'Jessica T.', 'Amanda R.', 'Michelle K.', 'Emily W.',
-        'Jennifer L.', 'Ashley B.', 'Stephanie C.', 'Nicole P.', 'Rachel G.',
-        'Megan H.', 'Lauren D.', 'Brittany S.', 'Samantha F.', 'Kayla M.'
-      ];
-
-      const locations = [
-        'from Texas', 'from California', 'from Florida', 'from New York',
-        'from Ohio', 'from Georgia', 'from Michigan', 'from Arizona'
-      ];
-
-      const messages = [
-        'just subscribed to the program!',
-        'just started their journey!',
-        'just unlocked premium access!',
-        'just joined our community!',
-        'just secured their spot!'
-      ];
-
-      const notificationEl = document.getElementById('socialProofNotification');
-      const textEl = document.getElementById('notificationText');
-      const imageEl = document.getElementById('notificationImage');
-
-      function getRandomItem(arr) {
-        return arr[Math.floor(Math.random() * arr.length)];
-      }
-
+      var names = ['Sarah M.', 'Jessica T.', 'Amanda R.', 'Emily K.', 'Michelle D.'];
+      var locations = ['Texas', 'California', 'Florida', 'New York', 'Ohio'];
+      var times = ['1 minute ago', '3 minutes ago', '5 minutes ago', '8 minutes ago'];
       function showNotification() {
-        const name = getRandomItem(names);
-        const location = getRandomItem(locations);
-        const message = getRandomItem(messages);
-        const initial = name.charAt(0);
-
-        textEl.innerHTML = `<strong>${name}</strong> ${location} ${message}`;
-        imageEl.textContent = initial;
-
-        notificationEl.classList.add('show');
-
-        setTimeout(() => {
-          notificationEl.classList.remove('show');
-        }, 4000);
+        var name = names[Math.floor(Math.random() * names.length)];
+        var location = locations[Math.floor(Math.random() * locations.length)];
+        var time = times[Math.floor(Math.random() * times.length)];
+        document.getElementById('sp-name').textContent = name;
+        document.getElementById('sp-location').textContent = location;
+        document.getElementById('sp-time').textContent = time;
+        document.getElementById('social-proof').style.display = 'block';
+        setTimeout(function() { document.getElementById('social-proof').style.display = 'none'; }, 5000);
       }
-
-      // Initial delay before first notification
-      setTimeout(() => {
-        showNotification();
-        
-        // Then show notifications at regular intervals
-        setInterval(() => {
-          showNotification();
-        }, {{ section.settings.notification_frequency | times: 1000 }});
-      }, 3000);
+      setInterval(showNotification, 15000);
+      setTimeout(showNotification, 3000);
     })();
   </script>
-{%- endif -%}
-
+</div>
 {% schema %}
 {
   "name": "Social Proof Notification",
-  "tag": "section",
-  "class": "section",
-  "settings": [
-    {
-      "type": "checkbox",
-      "id": "enable_social_proof",
-      "label": "Enable Social Proof",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "notification_frequency",
-      "min": 5,
-      "max": 30,
-      "step": 1,
-      "default": 10,
-      "label": "Frequency (seconds)",
-      "info": "How often to show notifications"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Social Proof Notification"
-    }
-  ]
+  "settings": []
 }
 {% endschema %}

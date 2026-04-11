@@ -1,287 +1,61 @@
-{%- style -%}
-  .testimonials {
-    padding: 5rem 2rem;
-    background: linear-gradient(180deg, {{ settings.color_background }} 0%, #f8f9fa 100%);
-  }
-
-  .testimonials__container {
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-
-  .testimonials__header {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-
-  .testimonials__badge {
-    display: inline-block;
-    background: {{ settings.color_secondary }};
-    color: white;
-    padding: 0.5rem 1.5rem;
-    border-radius: 50px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-
-  .testimonials__title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    color: {{ settings.color_text }};
-    margin-bottom: 1rem;
-  }
-
-  .testimonials__subtitle {
-    font-size: 1.125rem;
-    color: #666;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .testimonials__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-  }
-
-  .testimonial-card {
-    background: white;
-    padding: 2.5rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    position: relative;
-  }
-
-  .testimonial-card__quote {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    font-size: 4rem;
-    color: {{ settings.color_primary }};
-    opacity: 0.2;
-    line-height: 1;
-  }
-
-  .testimonial-card__rating {
-    display: flex;
-    gap: 0.25rem;
-    margin-bottom: 1.5rem;
-    color: #FFB800;
-  }
-
-  .testimonial-card__text {
-    font-size: 1.0625rem;
-    color: {{ settings.color_text }};
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    font-style: italic;
-  }
-
-  .testimonial-card__author {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .testimonial-card__avatar {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, {{ settings.color_primary }}, {{ settings.color_secondary }});
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 700;
-    font-size: 1.25rem;
-  }
-
-  .testimonial-card__info h4 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: {{ settings.color_text }};
-    margin: 0;
-  }
-
-  .testimonial-card__info p {
-    font-size: 0.875rem;
-    color: #666;
-    margin: 0.25rem 0 0;
-  }
-
-  .testimonial-card__result {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #f0f0f0;
-  }
-
-  .testimonial-card__result-label {
-    font-size: 0.75rem;
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
-  }
-
-  .testimonial-card__result-value {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: {{ settings.color_primary }};
-  }
-
-  @media screen and (max-width: 768px) {
-    .testimonials {
-      padding: 3rem 1rem;
-    }
-
-    .testimonials__grid {
-      grid-template-columns: 1fr;
-    }
-  }
-{%- endstyle -%}
-
-<section class="testimonials">
-  <div class="testimonials__container">
-    <div class="testimonials__header">
-      {%- if section.testimonials_badge != blank -%}
-        <span class="testimonials__badge">{{ section.testimonials_badge }}</span>
-      {%- endif -%}
-      
-      <h2 class="testimonials__title">{{ section.testimonials_title }}</h2>
-      
-      {%- if section.testimonials_subtitle != blank -%}
-        <p class="testimonials__subtitle">{{ section.testimonials_subtitle }}</p>
-      {%- endif -%}
+<section class="testimonials-grid section">
+  <style>
+    .testimonials-grid { background: var(--color-light-gray); }
+    .testimonials-grid__inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-md); }
+    .testimonials-grid__header { text-align: center; margin-bottom: var(--spacing-xl); }
+    .testimonials-grid__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg); }
+    .testimonial-card { padding: var(--spacing-lg); border-radius: var(--border-radius); background: white; box-shadow: var(--shadow-sm); }
+    .testimonial-card__text { font-size: 1.125rem; line-height: 1.8; color: var(--color-text); margin-bottom: var(--spacing-md); font-style: italic; }
+    .testimonial-card__author { display: flex; align-items: center; gap: var(--spacing-sm); }
+    .testimonial-card__avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--color-primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; }
+    .testimonial-card__info h4 { font-weight: 600; margin: 0; }
+    .testimonial-card__location { color: #666; font-size: 0.875rem; }
+    .testimonial-card__result { margin-top: var(--spacing-sm); padding-top: var(--spacing-sm); border-top: 1px solid var(--color-border); color: var(--color-primary); font-weight: 600; }
+    @media (max-width: 768px) { .testimonials-grid__grid { grid-template-columns: 1fr; } }
+  </style>
+  <div class="testimonials-grid__inner">
+    <div class="testimonials-grid__header">
+      <span class="section-badge">{{ section.settings.testimonials_badge }}</span>
+      <h2 class="section-title">{{ section.settings.testimonials_title }}</h2>
+      <p class="section-subtitle">{{ section.settings.testimonials_subtitle }}</p>
     </div>
-
-    <div class="testimonials__grid">
-      {%- for block in section.blocks -%}
+    <div class="testimonials-grid__grid">
+      {% for block in section.blocks %}
         <div class="testimonial-card" {{ block.shopify_attributes }}>
-          <span class="testimonial-card__quote">"</span>
-          
-          <div class="testimonial-card__rating">
-            {%- for i in (1..5) -%}
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-            {%- endfor -%}
-          </div>
-          
-          <p class="testimonial-card__text">{{ block.settings.testimonial_text }}</p>
-          
+          <p class="testimonial-card__text">"{{ block.settings.testimonial_text }}"</p>
           <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">
-              {{ block.settings.author_name | slice: 0 }}
-            </div>
+            <div class="testimonial-card__avatar">{{ block.settings.author_name | slice: 0 }}</div>
             <div class="testimonial-card__info">
               <h4>{{ block.settings.author_name }}</h4>
-              <p>{{ block.settings.author_location }}</p>
+              <span class="testimonial-card__location">{{ block.settings.author_location }}</span>
             </div>
           </div>
-          
-          {%- if block.settings.result_text != blank -%}
-            <div class="testimonial-card__result">
-              <p class="testimonial-card__result-label">Result</p>
-              <p class="testimonial-card__result-value">{{ block.settings.result_text }}</p>
-            </div>
-          {%- endif -%}
+          <div class="testimonial-card__result">{{ block.settings.result_text }}</div>
         </div>
-      {%- endfor -%}
+      {% endfor %}
     </div>
   </div>
 </section>
-
 {% schema %}
 {
-  "name": "Testimonials Section",
-  "tag": "section",
-  "class": "section",
+  "name": "Testimonials Grid",
   "settings": [
-    {
-      "type": "text",
-      "id": "testimonials_badge",
-      "label": "Badge Text",
-      "default": "Success Stories"
-    },
-    {
-      "type": "text",
-      "id": "testimonials_title",
-      "label": "Heading",
-      "default": "Real People, Real Results"
-    },
-    {
-      "type": "textarea",
-      "id": "testimonials_subtitle",
-      "label": "Subheading",
-      "default": "See how our program has transformed the lives of thousands of members."
-    }
+    {"type": "text", "id": "testimonials_badge", "label": "Badge", "default": "Success Stories"},
+    {"type": "text", "id": "testimonials_title", "label": "Title", "default": "Real People, Real Results"},
+    {"type": "textarea", "id": "testimonials_subtitle", "label": "Subtitle", "default": "See how our program has transformed lives."}
   ],
   "blocks": [
     {
       "type": "testimonial",
       "name": "Testimonial",
       "settings": [
-        {
-          "type": "textarea",
-          "id": "testimonial_text",
-          "label": "Testimonial Text",
-          "default": "This program completely changed my life. I've tried everything before, but this is the first thing that actually worked!"
-        },
-        {
-          "type": "text",
-          "id": "author_name",
-          "label": "Author Name",
-          "default": "Sarah M."
-        },
-        {
-          "type": "text",
-          "id": "author_location",
-          "label": "Location",
-          "default": "Texas"
-        },
-        {
-          "type": "text",
-          "id": "result_text",
-          "label": "Result (e.g., 'Lost 35 lbs')",
-          "default": "Lost 35 lbs in 3 months"
-        }
+        {"type": "textarea", "id": "testimonial_text", "label": "Testimonial Text", "default": "This program changed my life!"},
+        {"type": "text", "id": "author_name", "label": "Author Name", "default": "Sarah M."},
+        {"type": "text", "id": "author_location", "label": "Location", "default": "Texas"},
+        {"type": "text", "id": "result_text", "label": "Result Text", "default": "Lost 35 lbs in 3 months"}
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Testimonials Section",
-      "blocks": [
-        {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "This program completely changed my life. I've tried everything before, but this is the first thing that actually worked!",
-            "author_name": "Sarah M.",
-            "author_location": "Texas",
-            "result_text": "Lost 35 lbs in 3 months"
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "The support from the community and experts is incredible. I finally feel confident and healthy again.",
-            "author_name": "Jessica T.",
-            "author_location": "California",
-            "result_text": "Down 28 lbs and feeling amazing"
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "Best investment I've ever made. The personalized approach really makes all the difference.",
-            "author_name": "Amanda R.",
-            "author_location": "Florida",
-            "result_text": "Lost 42 lbs and kept it off"
-          }
-        }
-      ]
-    }
-  ]
+  "presets": [{"name": "Testimonials Grid", "blocks": [{"type": "testimonial"}, {"type": "testimonial"}, {"type": "testimonial"}]}]
 }
 {% endschema %}
