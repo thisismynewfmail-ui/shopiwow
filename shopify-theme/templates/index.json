@@ -1,0 +1,141 @@
+{
+  "sections": {
+    "countdown-bar": {
+      "type": "countdown-bar",
+      "settings": {
+        "enable_countdown": true,
+        "countdown_message": "⚡ Special Offer Ends Soon! Lock in your spot before prices increase!",
+        "countdown_hours": 4
+      }
+    },
+    "hero-banner": {
+      "type": "hero-banner",
+      "settings": {
+        "badge_text": "Limited Time Offer",
+        "title": "Transform Your Health Journey",
+        "subtitle": "Science-backed weight loss program designed by experts. Join thousands who have already transformed their lives.",
+        "button_primary_text": "Start Now - $149/mo",
+        "button_secondary_text": "Learn More",
+        "show_stats": true,
+        "stat_1_value": "10K+",
+        "stat_1_label": "Active Members",
+        "stat_2_value": "94%",
+        "stat_2_label": "Success Rate",
+        "stat_3_value": "24/7",
+        "stat_3_label": "Expert Support"
+      }
+    },
+    "features-grid": {
+      "type": "features-grid",
+      "settings": {
+        "features_badge": "Why Choose Us",
+        "features_title": "Everything You Need to Succeed",
+        "features_subtitle": "Our comprehensive program gives you all the tools and support you need to achieve your goals."
+      },
+      "blocks": {
+        "feature-1": {
+          "type": "feature",
+          "settings": {
+            "icon": "🎯",
+            "title": "Personalized Plan",
+            "description": "Custom-tailored approach designed specifically for your unique needs and goals."
+          }
+        },
+        "feature-2": {
+          "type": "feature",
+          "settings": {
+            "icon": "👨‍⚕️",
+            "title": "Expert Guidance",
+            "description": "Access to certified health professionals who provide ongoing support and advice."
+          }
+        },
+        "feature-3": {
+          "type": "feature",
+          "settings": {
+            "icon": "📱",
+            "title": "Mobile App Access",
+            "description": "Track your progress, log meals, and stay motivated with our intuitive mobile app."
+          }
+        },
+        "feature-4": {
+          "type": "feature",
+          "settings": {
+            "icon": "👥",
+            "title": "Community Support",
+            "description": "Join thousands of members in our supportive community sharing tips and success stories."
+          }
+        }
+      },
+      "order": ["feature-1", "feature-2", "feature-3", "feature-4"]
+    },
+    "testimonials-grid": {
+      "type": "testimonials-grid",
+      "settings": {
+        "testimonials_badge": "Success Stories",
+        "testimonials_title": "Real People, Real Results",
+        "testimonials_subtitle": "See how our program has transformed the lives of thousands of members."
+      },
+      "blocks": {
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "This program completely changed my life. I've tried everything before, but this is the first thing that actually worked!",
+            "author_name": "Sarah M.",
+            "author_location": "Texas",
+            "result_text": "Lost 35 lbs in 3 months"
+          }
+        },
+        "testimonial-2": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "The support from the community and experts is incredible. I finally feel confident and healthy again.",
+            "author_name": "Jessica T.",
+            "author_location": "California",
+            "result_text": "Down 28 lbs and feeling amazing"
+          }
+        },
+        "testimonial-3": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Best investment I've ever made. The personalized approach really makes all the difference.",
+            "author_name": "Amanda R.",
+            "author_location": "Florida",
+            "result_text": "Lost 42 lbs and kept it off"
+          }
+        }
+      },
+      "order": ["testimonial-1", "testimonial-2", "testimonial-3"]
+    },
+    "pricing-plans": {
+      "type": "pricing-plans",
+      "settings": {
+        "pricing_badge": "Simple Pricing",
+        "pricing_title": "Choose Your Plan",
+        "pricing_subtitle": "Start your transformation today with our all-inclusive subscription."
+      },
+      "blocks": {
+        "plan-1": {
+          "type": "plan",
+          "settings": {
+            "badge_text": "Most Popular",
+            "plan_name": "Premium",
+            "price": "149",
+            "period": "month",
+            "featured": true,
+            "features": [
+              "Personalized meal plans",
+              "Daily coaching support",
+              "Mobile app access",
+              "Community membership",
+              "Weekly progress tracking"
+            ],
+            "button_text": "Start Now",
+            "guarantee_text": "30-day money-back guarantee"
+          }
+        }
+      },
+      "order": ["plan-1"]
+    }
+  },
+  "order": ["countdown-bar", "hero-banner", "features-grid", "testimonials-grid", "pricing-plans"]
+}

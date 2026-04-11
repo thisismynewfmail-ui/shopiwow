@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_share_button": true,
+        "enable_payment_button": true
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {}
+    }
+  },
+  "order": ["main", "recommendations"]
+}
