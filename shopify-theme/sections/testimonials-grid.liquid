@@ -144,14 +144,14 @@
 <section class="testimonials">
   <div class="testimonials__container">
     <div class="testimonials__header">
-      {%- if section.testimonials_badge != blank -%}
-        <span class="testimonials__badge">{{ section.testimonials_badge }}</span>
+      {%- if section.settings.testimonials_badge != blank -%}
+        <span class="testimonials__badge">{{ section.settings.testimonials_badge }}</span>
       {%- endif -%}
-      
-      <h2 class="testimonials__title">{{ section.testimonials_title }}</h2>
-      
-      {%- if section.testimonials_subtitle != blank -%}
-        <p class="testimonials__subtitle">{{ section.testimonials_subtitle }}</p>
+
+      <h2 class="testimonials__title">{{ section.settings.testimonials_title }}</h2>
+
+      {%- if section.settings.testimonials_subtitle != blank -%}
+        <p class="testimonials__subtitle">{{ section.settings.testimonials_subtitle }}</p>
       {%- endif -%}
     </div>
 

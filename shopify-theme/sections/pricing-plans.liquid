@@ -210,14 +210,14 @@
 <section class="pricing">
   <div class="pricing__container">
     <div class="pricing__header">
-      {%- if section.pricing_badge != blank -%}
-        <span class="pricing__badge">{{ section.pricing_badge }}</span>
+      {%- if section.settings.pricing_badge != blank -%}
+        <span class="pricing__badge">{{ section.settings.pricing_badge }}</span>
       {%- endif -%}
-      
-      <h2 class="pricing__title">{{ section.pricing_title }}</h2>
-      
-      {%- if section.pricing_subtitle != blank -%}
-        <p class="pricing__subtitle">{{ section.pricing_subtitle }}</p>
+
+      <h2 class="pricing__title">{{ section.settings.pricing_title }}</h2>
+
+      {%- if section.settings.pricing_subtitle != blank -%}
+        <p class="pricing__subtitle">{{ section.settings.pricing_subtitle }}</p>
       {%- endif -%}
     </div>
 
@@ -239,13 +239,17 @@
 
           <div class="pricing-card__body">
             <ul class="pricing-card__features">
-              {%- for feature in block.settings.features -%}
-                <li class="pricing-card__feature">
-                  <svg class="pricing-card__feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  {{ feature }}
-                </li>
+              {%- assign feature_lines = block.settings.features | newline_to_br | split: '<br />' -%}
+              {%- for feature in feature_lines -%}
+                {%- assign feature_text = feature | strip -%}
+                {%- if feature_text != blank -%}
+                  <li class="pricing-card__feature">
+                    <svg class="pricing-card__feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    {{ feature_text }}
+                  </li>
+                {%- endif -%}
               {%- endfor -%}
             </ul>
           </div>
@@ -325,7 +329,7 @@
           "default": true
         },
         {
-          "type": "text_area",
+          "type": "textarea",
           "id": "features",
           "label": "Features (one per line)",
           "default": "Personalized meal plans\nDaily coaching support\nMobile app access\nCommunity membership\nWeekly progress tracking"

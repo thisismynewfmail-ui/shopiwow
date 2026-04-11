@@ -1,120 +1,124 @@
-{
-  "name": "GLP-1 Weight Loss Subscription Theme",
-  "version": "1.0.0",
-  "documentation_version": "2024-01",
-  "license": "unlicensed",
-  "settings_schema": [
-    {
-      "name": "theme_info",
-      "theme_name": "GLP-1 Weight Loss",
-      "theme_version": "1.0.0",
-      "theme_author": "Theme Developer",
-      "theme_documentation_url": "https://help.shopify.com/",
-      "theme_support_url": "https://support.shopify.com/"
-    },
-    {
-      "name": "Colors",
-      "settings": [
-        {
-          "type": "color",
-          "id": "color_primary",
-          "label": "Primary Color",
-          "default": "#2E7D32"
-        },
-        {
-          "type": "color",
-          "id": "color_secondary",
-          "label": "Secondary Color",
-          "default": "#81C784"
-        },
-        {
-          "type": "color",
-          "id": "color_accent",
-          "label": "Accent Color",
-          "default": "#FF6B35"
-        },
-        {
-          "type": "color",
-          "id": "color_background",
-          "label": "Background Color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "id": "color_text",
-          "label": "Text Color",
-          "default": "#1A1A1A"
-        }
-      ]
-    },
-    {
-      "name": "Typography",
-      "settings": [
-        {
-          "type": "font_picker",
-          "id": "font_heading",
-          "label": "Heading Font",
-          "default": "assistant_n4"
-        },
-        {
-          "type": "font_picker",
-          "id": "font_body",
-          "label": "Body Font",
-          "default": "assistant_n4"
-        }
-      ]
-    },
-    {
-      "name": "Social Proof Settings",
-      "settings": [
-        {
-          "type": "checkbox",
-          "id": "enable_social_proof",
-          "label": "Enable Social Proof Notifications",
-          "default": true
-        },
-        {
-          "type": "text",
-          "id": "social_proof_message",
-          "label": "Social Proof Message",
-          "default": "Someone just subscribed!"
-        },
-        {
-          "type": "range",
-          "id": "social_proof_frequency",
-          "label": "Notification Frequency (seconds)",
-          "min": 5,
-          "max": 30,
-          "step": 1,
-          "default": 10
-        }
-      ]
-    },
-    {
-      "name": "Scarcity Settings",
-      "settings": [
-        {
-          "type": "checkbox",
-          "id": "enable_countdown",
-          "label": "Enable Countdown Timer",
-          "default": true
-        },
-        {
-          "type": "text",
-          "id": "countdown_text",
-          "label": "Countdown Label",
-          "default": "Offer expires in:"
-        },
-        {
-          "type": "range",
-          "id": "countdown_hours",
-          "label": "Countdown Duration (hours)",
-          "min": 1,
-          "max": 24,
-          "step": 1,
-          "default": 4
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "name": "theme_info",
+    "theme_name": "GLP-1 Weight Loss",
+    "theme_version": "1.0.0",
+    "theme_author": "Theme Developer",
+    "theme_documentation_url": "https:\/\/help.shopify.com\/",
+    "theme_support_url": "https:\/\/support.shopify.com\/"
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary Color",
+        "default": "#2E7D32"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary Color",
+        "default": "#81C784"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color",
+        "default": "#FF6B35"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text Color",
+        "default": "#1A1A1A"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "assistant_n4"
+      }
+    ]
+  },
+  {
+    "name": "Social Proof Settings",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_social_proof",
+        "label": "Enable Social Proof Notifications",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "social_proof_message",
+        "label": "Social Proof Message",
+        "default": "Someone just subscribed!"
+      },
+      {
+        "type": "range",
+        "id": "social_proof_frequency",
+        "label": "Notification Frequency (seconds)",
+        "min": 5,
+        "max": 30,
+        "step": 1,
+        "default": 10
+      }
+    ]
+  },
+  {
+    "name": "Scarcity Settings",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_countdown",
+        "label": "Enable Countdown Timer",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "countdown_text",
+        "label": "Countdown Label",
+        "default": "Offer expires in:"
+      },
+      {
+        "type": "range",
+        "id": "countdown_hours",
+        "label": "Countdown Duration (hours)",
+        "min": 1,
+        "max": 24,
+        "step": 1,
+        "default": 4
+      }
+    ]
+  }
+]
