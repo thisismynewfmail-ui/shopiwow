@@ -1,0 +1,94 @@
+{%- style -%}
+  .collection {
+    padding: 4rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .collection__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .collection__title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .collection__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .product-card img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .product-card__body {
+    padding: 1rem 1.25rem 1.5rem;
+  }
+
+  .product-card__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: {{ settings.color_text }};
+    margin-bottom: 0.5rem;
+  }
+
+  .product-card__price {
+    color: {{ settings.color_primary }};
+    font-weight: 700;
+  }
+{%- endstyle -%}
+
+<div class="collection">
+  <div class="collection__header">
+    <h1 class="collection__title">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="collection__description rte">{{ collection.description }}</div>
+    {%- endif -%}
+  </div>
+
+  {%- paginate collection.products by 12 -%}
+    {%- if collection.products_count > 0 -%}
+      <div class="collection__grid">
+        {%- for product in collection.products -%}
+          <a class="product-card" href="{{ product.url }}">
+            {%- if product.featured_image != blank -%}
+              <img
+                src="{{ product.featured_image | image_url: width: 600 }}"
+                alt="{{ product.featured_image.alt | escape }}"
+                loading="lazy"
+              >
+            {%- endif -%}
+            <div class="product-card__body">
+              <h2 class="product-card__title">{{ product.title }}</h2>
+              <p class="product-card__price">{{ product.price | money }}</p>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination">{{ paginate | default_pagination }}</nav>
+      {%- endif -%}
+    {%- else -%}
+      <p>No products found.</p>
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>

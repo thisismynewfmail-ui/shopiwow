@@ -19,6 +19,17 @@
       "opening_soon": "Opening Soon"
     }
   },
+  "accessibility": {
+    "skip_to_text": "Skip to content",
+    "refresh_page": "Choosing a selection results in a full page refresh.",
+    "close": "Close",
+    "unit_price_separator": "per",
+    "vendor": "Vendor:",
+    "reviews": "reviews",
+    "link_messages": {
+      "new_window": "Opens in a new window."
+    }
+  },
   "sections": {
     "header": {
       "cart_count": "{{ count }} items",
@@ -74,12 +85,14 @@
       "guest_continue": "Continue"
     }
   },
-  "accessibility": {
-    "skip_to_text": "Skip to content",
-    "close": "Close",
-    "unit_price_separator": "per",
-    "vendor": "Vendor:",
-    "reviews": "reviews"
+  "gift_cards": {
+    "issued": {
+      "title": "Your gift card",
+      "subtext": "Here's your gift card!",
+      "redeem_html": "Use this code at checkout to redeem your {{ value }} gift card",
+      "shop_link": "Start shopping",
+      "print": "Print"
+    }
   },
   "date_formats": {
     "month_day_year": "%B %d, %Y"

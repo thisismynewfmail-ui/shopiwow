@@ -98,14 +98,14 @@
 <section class="features">
   <div class="features__container">
     <div class="features__header">
-      {%- if section.features_badge != blank -%}
-        <span class="features__badge">{{ section.features_badge }}</span>
+      {%- if section.settings.features_badge != blank -%}
+        <span class="features__badge">{{ section.settings.features_badge }}</span>
       {%- endif -%}
-      
-      <h2 class="features__title">{{ section.features_title }}</h2>
-      
-      {%- if section.features_subtitle != blank -%}
-        <p class="features__subtitle">{{ section.features_subtitle }}</p>
+
+      <h2 class="features__title">{{ section.settings.features_title }}</h2>
+
+      {%- if section.settings.features_subtitle != blank -%}
+        <p class="features__subtitle">{{ section.settings.features_subtitle }}</p>
       {%- endif -%}
     </div>
 

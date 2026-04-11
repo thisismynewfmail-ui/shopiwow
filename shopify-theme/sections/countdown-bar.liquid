@@ -87,48 +87,51 @@
   </div>
 
   <script>
-    (function() {
-      const countdownEl = document.querySelector('.countdown-bar');
+    (function () {
+      var countdownEl = document.querySelector('.countdown-bar');
       if (!countdownEl) return;
 
-      const endDate = new Date(countdownEl.dataset.countdownEnd).getTime();
+      var durationMs = {{ section.settings.countdown_hours | default: 4 }} * 60 * 60 * 1000;
+      var configuredEnd = countdownEl.getAttribute('data-countdown-end');
+      var endTime;
+
+      if (configuredEnd) {
+        var parsed = new Date(configuredEnd).getTime();
+        if (!isNaN(parsed)) {
+          endTime = parsed;
+        }
+      }
+
+      if (!endTime) {
+        var stored = parseInt(localStorage.getItem('countdownEnd'), 10);
+        if (!isNaN(stored) && stored > Date.now()) {
+          endTime = stored;
+        } else {
+          endTime = Date.now() + durationMs;
+          localStorage.setItem('countdownEnd', String(endTime));
+        }
+      }
+
+      var hoursEl = countdownEl.querySelector('[data-hours]');
+      var minutesEl = countdownEl.querySelector('[data-minutes]');
+      var secondsEl = countdownEl.querySelector('[data-seconds]');
 
       function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = endDate - now;
+        var distance = endTime - Date.now();
 
-        if (distance < 0) {
-          // Reset countdown when it reaches zero
-          const newEndDate = new Date();
-          newEndDate.setHours(newEndDate.getHours() + {{ section.settings.countdown_hours }});
-          localStorage.setItem('countdownEnd', newEndDate.getTime());
-          location.reload();
-          return;
+        if (distance <= 0) {
+          endTime = Date.now() + durationMs;
+          localStorage.setItem('countdownEnd', String(endTime));
+          distance = endTime - Date.now();
         }
 
-        const hours = Math.floor(distance / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        const hoursEl = countdownEl.querySelector('[data-hours]');
-        const minutesEl = countdownEl.querySelector('[data-minutes]');
-        const secondsEl = countdownEl.querySelector('[data-seconds]');
+        var hours = Math.floor(distance / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
         if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
         if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
-      }
-
-      // Check for stored end date
-      const storedEnd = localStorage.getItem('countdownEnd');
-      if (storedEnd) {
-        countdownEl.dataset.countdownEnd = storedEnd;
-      } else {
-        // Set initial end date
-        const newEndDate = new Date();
-        newEndDate.setHours(newEndDate.getHours() + {{ section.settings.countdown_hours }});
-        localStorage.setItem('countdownEnd', newEndDate.getTime());
-        countdownEl.dataset.countdownEnd = newEndDate;
       }
 
       updateCountdown();
@@ -166,10 +169,10 @@
       "info": "Timer will reset after reaching zero"
     },
     {
-      "type": "date",
+      "type": "text",
       "id": "countdown_end_date",
       "label": "End Date (optional)",
-      "info": "Leave empty to use duration-based countdown"
+      "info": "ISO format, e.g. 2026-12-31T23:59:59. Leave empty to use duration-based countdown."
     }
   ],
   "presets": [
