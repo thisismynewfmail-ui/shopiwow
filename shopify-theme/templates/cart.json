@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "settings": {
+        "cart_type": "drawer",
+        "show_vendor": false,
+        "show_sku": false
+      }
+    }
+  },
+  "order": ["main"]
+}
