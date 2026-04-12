@@ -1,0 +1,286 @@
+{%- style -%}
+  .medvi-hero {
+    position: relative;
+    padding: 140px 0 60px;
+    background: linear-gradient(135deg, #121231 0%, #1a1a3e 100%);
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .medvi-hero__promo {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: #000;
+    padding: 14px 10px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  .medvi-hero__promo-content {
+    text-align: center;
+  }
+  
+  .medvi-hero__promo-pill {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #fde68a, #c6a673, #c6a673);
+  }
+  
+  .medvi-hero__promo-headline {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+  }
+  
+  .medvi-hero__promo-subline {
+    font-size: 12px;
+    font-weight: 500;
+    color: #000;
+    margin-top: 2px;
+  }
+  
+  .medvi-hero__promo-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: #fff;
+    margin-top: 6px;
+  }
+  
+  .medvi-hero__firework {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+  
+  .medvi-hero__firework--left {
+    left: 10px;
+  }
+  
+  .medvi-hero__firework--right {
+    right: 10px;
+  }
+  
+  .medvi-hero__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .medvi-hero__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  
+  .medvi-hero__text {
+    color: #fff;
+  }
+  
+  .medvi-hero__preheader {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .medvi-hero__preheader span {
+    color: #08a88a;
+    font-weight: 700;
+  }
+  
+  .medvi-hero__title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  
+  .medvi-hero__title span {
+    color: #08a88a;
+  }
+  
+  .medvi-hero__checklist {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .medvi-hero__checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  .medvi-hero__checklist-item img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .medvi-hero__checklist-item span {
+    font-weight: 600;
+    color: #08a88a;
+  }
+  
+  .medvi-hero__cta {
+    display: inline-block;
+    background: #08a88a;
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .medvi-hero__cta:hover {
+    background: #069b7a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(8, 168, 138, 0.3);
+  }
+  
+  .medvi-hero__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 600px;
+  }
+  
+  .medvi-hero__grid-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .medvi-hero__grid-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .medvi-hero__grid-item:nth-child(1) { grid-row: span 2; }
+  .medvi-hero__grid-item:nth-child(4) { grid-row: span 2; }
+  
+  @media screen and (max-width: 992px) {
+    .medvi-hero__content {
+      grid-template-columns: 1fr;
+    }
+    .medvi-hero__grid {
+      display: none;
+    }
+  }
+{%- endstyle -%}
+
+<div class="medvi-hero">
+  <div class="medvi-hero__promo">
+    <div class="medvi-hero__firework medvi-hero__firework--left">
+      <img src="{{ 'fireworks.gif' | asset_url }}" alt="Fireworks" style="max-height: 64px;">
+    </div>
+    <div class="medvi-hero__promo-content">
+      <div class="medvi-hero__promo-pill">
+        <div class="medvi-hero__promo-headline">SPRING Discount Applied!</div>
+        <div class="medvi-hero__promo-subline">Just $179 + Fast, Free Shipping</div>
+      </div>
+      <div class="medvi-hero__promo-sub">+ Fully backed by our weight loss guarantee!</div>
+    </div>
+    <div class="medvi-hero__firework medvi-hero__firework--right">
+      <img src="{{ 'fireworks.gif' | asset_url }}" alt="Fireworks" style="max-height: 64px;">
+    </div>
+  </div>
+  
+  <div class="medvi-hero__container">
+    <div class="medvi-hero__content">
+      <div class="medvi-hero__text">
+        <div class="medvi-hero__preheader">
+          Join <span>500,000+</span> MEDVi patients
+        </div>
+        <h1 class="medvi-hero__title">
+          Finally serious about weight loss? Shed your fat <span>by May</span> with personalized care and GLP-1 medication
+        </h1>
+        
+        <div class="medvi-hero__checklist">
+          <div class="medvi-hero__checklist-item">
+            <img src="{{ 'checkmark-icon-white.svg' | asset_url }}" alt="Check">
+            <span>Lose pounds of fat every week</span>
+          </div>
+          <div class="medvi-hero__checklist-item">
+            <img src="{{ 'checkmark-icon-white.svg' | asset_url }}" alt="Check">
+            <span>MEDVi Guarantee</span>
+          </div>
+          <div class="medvi-hero__checklist-item">
+            <img src="{{ 'checkmark-icon-white.svg' | asset_url }}" alt="Check">
+            <span>No membership or hidden fees!</span>
+          </div>
+          <div class="medvi-hero__checklist-item">
+            <img src="{{ 'checkmark-icon-white.svg' | asset_url }}" alt="Check">
+            <span>Start for just $179</span>, no insurance required + free shipping
+          </div>
+          <div class="medvi-hero__checklist-item">
+            <img src="{{ 'checkmark-icon-white.svg' | asset_url }}" alt="Check">
+            <span>HSA/FSA Approved!</span>
+          </div>
+        </div>
+        
+        <a href="{{ section.settings.cta_link }}" class="medvi-hero__cta">
+          {{ section.settings.cta_text | default: 'Am I Qualified?' }}
+        </a>
+      </div>
+      
+      <div class="medvi-hero__grid">
+        <div class="medvi-hero__grid-item">
+          <img src="{{ 'hero-grid-9.jpg' | asset_url }}" alt="Transformation">
+        </div>
+        <div class="medvi-hero__grid-item">
+          <img src="{{ 'hero-grid-4.jpg' | asset_url }}" alt="Results">
+        </div>
+        <div class="medvi-hero__grid-item">
+          <img src="{{ 'hero-grid-3.jpg' | asset_url }}" alt="Results">
+        </div>
+        <div class="medvi-hero__grid-item">
+          <img src="{{ 'hero-grid-8.jpg' | asset_url }}" alt="Results">
+        </div>
+        <div class="medvi-hero__grid-item">
+          <img src="{{ 'hero-grid-6b.jpg' | asset_url }}" alt="Results">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "MEDVi Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Am I Qualified?"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MEDVi Hero"
+    }
+  ]
+}
+{% endschema %}

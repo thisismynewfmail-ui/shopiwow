@@ -1,0 +1,116 @@
+{%- style -%}
+  .cart {
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .cart__title {
+    font-size: 2.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .cart__items {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .cart__items th,
+  .cart__items td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+  }
+
+  .cart__image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .cart__footer {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cart__subtotal {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .cart__checkout {
+    padding: 1rem 2rem;
+    background: {{ settings.color_primary }};
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+{%- endstyle -%}
+
+<div class="cart">
+  <h1 class="cart__title">{{ 'sections.cart.title' | t }}</h1>
+
+  {%- if cart.item_count > 0 -%}
+    {%- form 'cart', cart -%}
+      <table class="cart__items">
+        <thead>
+          <tr>
+            <th colspan="2">Product</th>
+            <th>{{ 'products.product.quantity' | t }}</th>
+            <th>{{ 'sections.cart.subtotal' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for item in cart.items -%}
+            <tr>
+              <td>
+                {%- if item.image != blank -%}
+                  <img class="cart__image" src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}">
+                {%- endif -%}
+              </td>
+              <td>
+                <a href="{{ item.url }}">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}
+                  <div>{{ item.variant.title }}</div>
+                {%- endunless -%}
+              </td>
+              <td>
+                <input
+                  type="number"
+                  name="updates[]"
+                  value="{{ item.quantity }}"
+                  min="0"
+                  aria-label="{{ 'products.product.quantity' | t }}"
+                >
+              </td>
+              <td>{{ item.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+
+      <div class="cart__footer">
+        <p class="cart__subtotal">
+          {{ 'sections.cart.subtotal' | t }}: {{ cart.total_price | money }}
+        </p>
+        <div>
+          <button type="submit" name="update" class="cart__checkout" style="background:#eee;color:#333;margin-right:.5rem;">
+            {{ 'sections.cart.update' | t }}
+          </button>
+          <button type="submit" name="checkout" class="cart__checkout">
+            {{ 'sections.cart.checkout' | t }}
+          </button>
+        </div>
+      </div>
+    {%- endform -%}
+  {%- else -%}
+    <p>{{ 'sections.cart.empty' | t }}</p>
+    <p><a href="{{ routes.all_products_collection_url }}">{{ 'sections.cart.continue_shopping' | t }}</a></p>
+  {%- endif -%}
+</div>

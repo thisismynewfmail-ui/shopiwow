@@ -1,0 +1,121 @@
+{%- style -%}
+  .medvi-numbers {
+    padding: 5rem 0;
+    background: #fff;
+  }
+  
+  .medvi-numbers__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .medvi-numbers__header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .medvi-numbers__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #121231;
+    margin-bottom: 1rem;
+  }
+  
+  .medvi-numbers__title span {
+    color: #08a88a;
+  }
+  
+  .medvi-numbers__subtitle {
+    font-size: 1.1rem;
+    color: #666;
+  }
+  
+  .medvi-numbers__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  
+  .medvi-numbers__card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 16px;
+    background: #f8f6f5;
+    transition: all 0.3s ease;
+  }
+  
+  .medvi-numbers__card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  
+  .medvi-numbers__value {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #121231;
+    margin-bottom: 0.5rem;
+  }
+  
+  .medvi-numbers__value span {
+    font-size: 1.5rem;
+  }
+  
+  .medvi-numbers__label {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .medvi-numbers__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+{%- endstyle -%}
+
+<div class="medvi-numbers" id="the-numbers">
+  <div class="medvi-numbers__container">
+    <div class="medvi-numbers__header">
+      <h2 class="medvi-numbers__title">
+        Why are so many patients signing up for MEDVi? <span>It works</span>.
+      </h2>
+      <p class="medvi-numbers__subtitle">
+        On average, patients in the MEDVi program lose 15-20% of their body weight.
+      </p>
+    </div>
+    
+    <div class="medvi-numbers__grid">
+      <div class="medvi-numbers__card">
+        <div class="medvi-numbers__value">11<span>%</span></div>
+        <div class="medvi-numbers__label">Average weight loss</div>
+      </div>
+      
+      <div class="medvi-numbers__card">
+        <div class="medvi-numbers__value">9/10</div>
+        <div class="medvi-numbers__label">Patients call it the most effective treatment to date</div>
+      </div>
+      
+      <div class="medvi-numbers__card">
+        <div class="medvi-numbers__value">2.9<span>"</span></div>
+        <div class="medvi-numbers__label">Potential waist reduction</div>
+      </div>
+      
+      <div class="medvi-numbers__card">
+        <div class="medvi-numbers__value">93<span>%</span></div>
+        <div class="medvi-numbers__label">Kept the weight off</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "MEDVi Numbers",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "presets": [
+    { "name": "MEDVi Numbers" }
+  ]
+}
+{% endschema %}

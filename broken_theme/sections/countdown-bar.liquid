@@ -1,0 +1,184 @@
+{%- style -%}
+  .countdown-bar {
+    background: {{ settings.color_accent }};
+    color: white;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+  }
+
+  .countdown-bar__content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .countdown-bar__timer {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .countdown-bar__unit {
+    background: rgba(255,255,255,0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    min-width: 50px;
+    text-align: center;
+  }
+
+  .countdown-bar__number {
+    font-size: 1.25rem;
+    font-weight: 800;
+    display: block;
+  }
+
+  .countdown-bar__label {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .countdown-bar__message {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .countdown-bar__content {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .countdown-bar__timer {
+      order: -1;
+    }
+  }
+{%- endstyle -%}
+
+{%- if section.settings.enable_countdown -%}
+  <div class="countdown-bar" data-countdown-end="{{ section.settings.countdown_end_date }}">
+    <div class="countdown-bar__content">
+      <div class="countdown-bar__message">
+        {{ section.settings.countdown_message }}
+      </div>
+      <div class="countdown-bar__timer">
+        <div class="countdown-bar__unit">
+          <span class="countdown-bar__number" data-hours>00</span>
+          <span class="countdown-bar__label">Hours</span>
+        </div>
+        <div class="countdown-bar__unit">
+          <span class="countdown-bar__number" data-minutes>00</span>
+          <span class="countdown-bar__label">Minutes</span>
+        </div>
+        <div class="countdown-bar__unit">
+          <span class="countdown-bar__number" data-seconds>00</span>
+          <span class="countdown-bar__label">Seconds</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var countdownEl = document.querySelector('.countdown-bar');
+      if (!countdownEl) return;
+
+      var durationMs = {{ section.settings.countdown_hours | default: 4 }} * 60 * 60 * 1000;
+      var configuredEnd = countdownEl.getAttribute('data-countdown-end');
+      var endTime;
+
+      if (configuredEnd) {
+        var parsed = new Date(configuredEnd).getTime();
+        if (!isNaN(parsed)) {
+          endTime = parsed;
+        }
+      }
+
+      if (!endTime) {
+        var stored = parseInt(localStorage.getItem('countdownEnd'), 10);
+        if (!isNaN(stored) && stored > Date.now()) {
+          endTime = stored;
+        } else {
+          endTime = Date.now() + durationMs;
+          localStorage.setItem('countdownEnd', String(endTime));
+        }
+      }
+
+      var hoursEl = countdownEl.querySelector('[data-hours]');
+      var minutesEl = countdownEl.querySelector('[data-minutes]');
+      var secondsEl = countdownEl.querySelector('[data-seconds]');
+
+      function updateCountdown() {
+        var distance = endTime - Date.now();
+
+        if (distance <= 0) {
+          endTime = Date.now() + durationMs;
+          localStorage.setItem('countdownEnd', String(endTime));
+          distance = endTime - Date.now();
+        }
+
+        var hours = Math.floor(distance / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+        if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+        if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Countdown Bar",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_countdown",
+      "label": "Enable Countdown",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "countdown_message",
+      "label": "Countdown Message",
+      "default": "⚡ Special Offer Ends Soon! Lock in your spot before prices increase!"
+    },
+    {
+      "type": "range",
+      "id": "countdown_hours",
+      "min": 1,
+      "max": 24,
+      "step": 1,
+      "default": 4,
+      "label": "Countdown Duration (hours)",
+      "info": "Timer will reset after reaching zero"
+    },
+    {
+      "type": "text",
+      "id": "countdown_end_date",
+      "label": "End Date (optional)",
+      "info": "ISO format, e.g. 2026-12-31T23:59:59. Leave empty to use duration-based countdown."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown Bar"
+    }
+  ]
+}
+{% endschema %}

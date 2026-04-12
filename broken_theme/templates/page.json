@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "medvi-header": {
+      "type": "medvi-header",
+      "settings": {
+        "cta_text": "Get Started",
+        "cta_link": "/pages/intake-form"
+      }
+    },
+    "main": {
+      "type": "page",
+      "settings": {}
+    },
+    "medvi-footer": {
+      "type": "medvi-footer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "medvi-header",
+    "main",
+    "medvi-footer"
+  ]
+}

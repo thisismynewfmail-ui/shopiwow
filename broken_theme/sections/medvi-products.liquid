@@ -1,0 +1,246 @@
+{%- style -%}
+  .medvi-products {
+    padding: 5rem 0;
+    background: #fff;
+  }
+  
+  .medvi-products__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .medvi-products__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .medvi-products__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #121231;
+    margin-bottom: 1rem;
+  }
+  
+  .medvi-products__title span {
+    color: #08a88a;
+  }
+  
+  .medvi-products__subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .medvi-products__subtitle span {
+    color: #08a88a;
+    font-weight: 600;
+  }
+  
+  .medvi-products__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .medvi-products__card {
+    position: relative;
+    padding: 2rem;
+    border-radius: 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .medvi-products__card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  
+  .medvi-products__card--mint { background: #e8f5f3; }
+  .medvi-products__card--sand { background: #e4dcd8; }
+  .medvi-products__card--sky { background: #dceaf4; }
+  
+  .medvi-products__tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  
+  .medvi-products__tag--popular {
+    background: #08a88a;
+    color: #fff;
+  }
+  
+  .medvi-products__tag--rx {
+    background: #121231;
+    color: #fff;
+  }
+  
+  .medvi-products__image {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .medvi-products__image img {
+    max-width: 180px;
+    height: auto;
+  }
+  
+  .medvi-products__info {
+    text-align: center;
+  }
+  
+  .medvi-products__price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  
+  .medvi-products__price--green { color: #08a88a; }
+  .medvi-products__price--gray { color: #666; }
+  
+  .medvi-products__name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #121231;
+    margin-bottom: 0.5rem;
+  }
+  
+  .medvi-products__desc {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  
+  .medvi-products__btn {
+    display: inline-block;
+    background: #08a88a;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+  
+  .medvi-products__card:hover .medvi-products__btn {
+    background: #069b7a;
+  }
+  
+  @media screen and (max-width: 992px) {
+    .medvi-products__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .medvi-products__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{%- endstyle -%}
+
+<div class="medvi-products" id="products">
+  <div class="medvi-products__container">
+    <div class="medvi-products__header">
+      <h2 class="medvi-products__title">
+        Trusted by experts, <span>priced for you.</span>
+      </h2>
+      <p class="medvi-products__subtitle">
+        Find the right GLP-1 medication with the confidence that comes from knowing it is <span>doctor-approved</span> and budget-friendly.
+      </p>
+    </div>
+    
+    <div class="medvi-products__grid">
+      <a href="{{ section.settings.product1_link }}" class="medvi-products__card medvi-products__card--mint">
+        <span class="medvi-products__tag medvi-products__tag--popular">Popular</span>
+        <div class="medvi-products__image">
+          <img src="{{ 'glp-injections-n.png' | asset_url }}" alt="GLP-1 Injections">
+        </div>
+        <div class="medvi-products__info">
+          <div class="medvi-products__price medvi-products__price--green">Starting at $179</div>
+          <div class="medvi-products__name">GLP-1 Injections</div>
+          <div class="medvi-products__desc">One simple injection per week.</div>
+          <span class="medvi-products__btn">Get Started</span>
+        </div>
+      </a>
+      
+      <a href="{{ section.settings.product2_link }}" class="medvi-products__card medvi-products__card--sand">
+        <span class="medvi-products__tag medvi-products__tag--rx">Rx</span>
+        <div class="medvi-products__image">
+          <img src="{{ 'wegovypill2.webp' | asset_url }}" alt="Wegovy Pill">
+        </div>
+        <div class="medvi-products__info">
+          <div class="medvi-products__price medvi-products__price--green">$99 Membership + Medication</div>
+          <div class="medvi-products__name">Wegovy® Pill</div>
+          <div class="medvi-products__desc">One pill per day</div>
+          <span class="medvi-products__btn">Get Started</span>
+        </div>
+      </a>
+      
+      <a href="{{ section.settings.product3_link }}" class="medvi-products__card medvi-products__card--mint">
+        <span class="medvi-products__tag medvi-products__tag--rx">Rx</span>
+        <div class="medvi-products__image">
+          <img src="{{ 'glp-tablets-n.png' | asset_url }}" alt="GLP-1 Tablets">
+        </div>
+        <div class="medvi-products__info">
+          <div class="medvi-products__price medvi-products__price--green">Starting at $249</div>
+          <div class="medvi-products__name">GLP-1 Tablets</div>
+          <div class="medvi-products__desc">One dissolvable tablet per day.</div>
+          <span class="medvi-products__btn">Get Started</span>
+        </div>
+      </a>
+      
+      <a href="{{ section.settings.product4_link }}" class="medvi-products__card medvi-products__card--sky">
+        <span class="medvi-products__tag medvi-products__tag--rx">Rx</span>
+        <div class="medvi-products__image">
+          <img src="{{ 'wegovypen.png' | asset_url }}" alt="Wegovy Injection">
+        </div>
+        <div class="medvi-products__info">
+          <div class="medvi-products__price medvi-products__price--gray">$99 Membership + Medication</div>
+          <div class="medvi-products__name">Wegovy® Injection</div>
+          <div class="medvi-products__desc">Availability is subject to change.</div>
+          <span class="medvi-products__btn">Get Started</span>
+        </div>
+      </a>
+      
+      <a href="{{ section.settings.product5_link }}" class="medvi-products__card medvi-products__card--sky">
+        <span class="medvi-products__tag medvi-products__tag--rx">Rx</span>
+        <div class="medvi-products__image">
+          <img src="{{ 'zepboundpen.png' | asset_url }}" alt="Zepbound Injection">
+        </div>
+        <div class="medvi-products__info">
+          <div class="medvi-products__price medvi-products__price--gray">$99 Membership + Medication</div>
+          <div class="medvi-products__name">Zepbound® Injection</div>
+          <div class="medvi-products__desc">Availability is subject to change.</div>
+          <span class="medvi-products__btn">Get Started</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "MEDVi Products",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "url", "id": "product1_link", "label": "Product 1 Link (GLP-1 Injections)" },
+    { "type": "url", "id": "product2_link", "label": "Product 2 Link (Wegovy Pill)" },
+    { "type": "url", "id": "product3_link", "label": "Product 3 Link (GLP-1 Tablets)" },
+    { "type": "url", "id": "product4_link", "label": "Product 4 Link (Wegovy Injection)" },
+    { "type": "url", "id": "product5_link", "label": "Product 5 Link (Zepbound)" }
+  ],
+  "presets": [
+    { "name": "MEDVi Products" }
+  ]
+}
+{% endschema %}
