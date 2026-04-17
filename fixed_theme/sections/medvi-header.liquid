@@ -1,0 +1,206 @@
+{%- style -%}
+  .medvi-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    font-family: var(--font-body);
+  }
+
+  .medvi-header__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .medvi-header__logo { display: flex; align-items: center; }
+  .medvi-header__logo img { max-width: {{ section.settings.logo_width | default: 200 }}px; height: auto; }
+
+  .medvi-header__nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .medvi-header__menu {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .medvi-header__menu-item a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+  }
+
+  .medvi-header__menu-item a:hover { color: var(--color-accent); }
+
+  .medvi-header__cta {
+    background: var(--color-accent);
+    color: #fff !important;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .medvi-header__cta:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(8,168,138,0.3);
+  }
+
+  .medvi-header__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    background: none;
+    border: 0;
+  }
+
+  .medvi-header__toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    display: block;
+  }
+
+  .medvi-header.is-open .medvi-header__toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .medvi-header.is-open .medvi-header__toggle span:nth-child(2) { opacity: 0; }
+  .medvi-header.is-open .medvi-header__toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 991px) {
+    .medvi-header__nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .medvi-header.is-open .medvi-header__nav {
+      max-height: 80vh;
+      padding: 1.5rem;
+    }
+    .medvi-header__menu {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .medvi-header__cta { text-align: center; }
+    .medvi-header__toggle { display: flex; }
+  }
+{%- endstyle -%}
+
+<header class="medvi-header" data-medvi-header>
+  <div class="medvi-header__container">
+    <a href="{{ routes.root_url }}" class="medvi-header__logo" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo != blank -%}
+        <img src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}" loading="eager" width="{{ section.settings.logo_width | default: 200 }}">
+      {%- elsif settings.logo != blank -%}
+        <img src="{{ settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}" loading="eager" width="{{ settings.logo_width | default: 200 }}">
+      {%- else -%}
+        <img src="{{ 'medvi-logo-soil.png' | asset_url }}" alt="{{ shop.name }}" width="{{ section.settings.logo_width | default: 200 }}" loading="eager">
+      {%- endif -%}
+    </a>
+
+    <button type="button" class="medvi-header__toggle" aria-label="Toggle menu" data-medvi-toggle>
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="medvi-header__nav" aria-label="Main">
+      <ul class="medvi-header__menu">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'link' -%}
+            <li class="medvi-header__menu-item" {{ block.shopify_attributes }}>
+              <a href="{{ block.settings.link | default: '#' }}">{{ block.settings.label }}</a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+
+      <a href="{{ section.settings.cta_link | default: '/pages/intake-form' }}" class="medvi-header__cta">
+        {{ section.settings.cta_text | default: 'Get Started' }}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  (function() {
+    var header = document.querySelector('[data-medvi-header]');
+    var toggle = header && header.querySelector('[data-medvi-toggle]');
+    if (!header || !toggle) return;
+    toggle.addEventListener('click', function () {
+      header.classList.toggle('is-open');
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "section",
+  "class": "section-header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo (section override)" },
+    { "type": "range", "id": "logo_width", "label": "Logo width (px)", "min": 80, "max": 320, "step": 10, "default": 200 },
+    { "type": "text", "id": "cta_text", "label": "CTA Button Text", "default": "Get Started" },
+    { "type": "url", "id": "cta_link", "label": "CTA Button Link" }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Nav link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Link" },
+        { "type": "url", "id": "link", "label": "URL" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "link", "settings": { "label": "Our Products", "link": "/#products" } },
+      { "type": "link", "settings": { "label": "Real Results", "link": "/#results" } },
+      { "type": "link", "settings": { "label": "The Numbers", "link": "/#the-numbers" } },
+      { "type": "link", "settings": { "label": "What To Expect", "link": "/#journey" } },
+      { "type": "link", "settings": { "label": "Testimonials", "link": "/#reviews" } }
+    ]
+  },
+  "presets": [
+    {
+      "name": "Header",
+      "blocks": [
+        { "type": "link", "settings": { "label": "Our Products", "link": "/#products" } },
+        { "type": "link", "settings": { "label": "Real Results", "link": "/#results" } },
+        { "type": "link", "settings": { "label": "The Numbers", "link": "/#the-numbers" } },
+        { "type": "link", "settings": { "label": "What To Expect", "link": "/#journey" } },
+        { "type": "link", "settings": { "label": "Testimonials", "link": "/#reviews" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

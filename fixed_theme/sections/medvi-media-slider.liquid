@@ -1,0 +1,121 @@
+{%- style -%}
+  .medvi-media {
+    padding: 3rem 0;
+    background: var(--color-background-alt);
+    overflow: hidden;
+  }
+  .medvi-media__label {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.75rem;
+  }
+  .medvi-media__viewport {
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  }
+  .medvi-media__track {
+    display: flex;
+    gap: 3.5rem;
+    align-items: center;
+    animation: medvi-media-scroll 32s linear infinite;
+    width: max-content;
+  }
+  .medvi-media__track:hover { animation-play-state: paused; }
+
+  @keyframes medvi-media-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .medvi-media__item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 130px;
+  }
+  .medvi-media__item img {
+    max-height: 40px;
+    max-width: 170px;
+    object-fit: contain;
+    opacity: 0.65;
+    filter: grayscale(100%);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+  .medvi-media__item:hover img {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+{%- endstyle -%}
+
+<section class="medvi-media">
+  <div class="container">
+    <p class="medvi-media__label">{{ section.settings.label | default: 'Proud to be featured in' }}</p>
+    <div class="medvi-media__viewport">
+      <div class="medvi-media__track">
+        {% for i in (1..2) %}
+          {%- for block in section.blocks -%}
+            <div class="medvi-media__item" {{ block.shopify_attributes }}>
+              {%- if block.settings.logo != blank -%}
+                <img src="{{ block.settings.logo | image_url: width: 300 }}" alt="{{ block.settings.name | escape }}">
+              {%- else -%}
+                <img src="{{ block.settings.fallback_asset | default: 'bloomberg.png' | asset_url }}" alt="{{ block.settings.name | escape }}">
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Media Bar",
+  "tag": "section",
+  "class": "section-media",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Proud to be featured in" }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Publication" },
+        { "type": "image_picker", "id": "logo", "label": "Logo image" },
+        { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename", "default": "bloomberg.png" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "logo", "settings": { "name": "Bloomberg", "fallback_asset": "bloomberg.png" } },
+      { "type": "logo", "settings": { "name": "Forbes", "fallback_asset": "logo-forbes.png" } },
+      { "type": "logo", "settings": { "name": "Healthline", "fallback_asset": "logo-healthline.png" } },
+      { "type": "logo", "settings": { "name": "WebMD", "fallback_asset": "logo-webmd.png" } },
+      { "type": "logo", "settings": { "name": "Fortune", "fallback_asset": "logo-fortune.png" } },
+      { "type": "logo", "settings": { "name": "Fast Company", "fallback_asset": "logo-fast-company.png" } },
+      { "type": "logo", "settings": { "name": "The New York Times", "fallback_asset": "logo-the-new-york-times.png" } }
+    ]
+  },
+  "presets": [
+    {
+      "name": "Media Bar",
+      "blocks": [
+        { "type": "logo", "settings": { "name": "Bloomberg", "fallback_asset": "bloomberg.png" } },
+        { "type": "logo", "settings": { "name": "Forbes", "fallback_asset": "logo-forbes.png" } },
+        { "type": "logo", "settings": { "name": "Healthline", "fallback_asset": "logo-healthline.png" } },
+        { "type": "logo", "settings": { "name": "WebMD", "fallback_asset": "logo-webmd.png" } },
+        { "type": "logo", "settings": { "name": "Fortune", "fallback_asset": "logo-fortune.png" } },
+        { "type": "logo", "settings": { "name": "Fast Company", "fallback_asset": "logo-fast-company.png" } },
+        { "type": "logo", "settings": { "name": "The New York Times", "fallback_asset": "logo-the-new-york-times.png" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

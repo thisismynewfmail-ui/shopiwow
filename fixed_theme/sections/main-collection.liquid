@@ -1,0 +1,100 @@
+{%- style -%}
+  .main-collection { padding: 4rem 0 5rem; }
+  .main-collection__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .main-collection__title {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+  }
+  .main-collection__description {
+    color: var(--color-text-muted);
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  .main-collection__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .product-card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  }
+  .product-card img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: var(--color-background-alt);
+  }
+  .product-card__body { padding: 1rem 1.25rem 1.5rem; }
+  .product-card__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 0.5rem;
+  }
+  .product-card__price {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+  .main-collection__pagination {
+    margin-top: 2.5rem;
+    text-align: center;
+  }
+{%- endstyle -%}
+
+<section class="main-collection">
+  <div class="container">
+    <div class="main-collection__header">
+      <h1 class="main-collection__title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="main-collection__description rte">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- paginate collection.products by 12 -%}
+      {%- if collection.products_count > 0 -%}
+        <div class="main-collection__grid">
+          {%- for product in collection.products -%}
+            <a class="product-card" href="{{ product.url }}">
+              {%- if product.featured_image != blank -%}
+                <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | escape | default: product.title }}" loading="lazy">
+              {%- endif -%}
+              <div class="product-card__body">
+                <h2 class="product-card__title">{{ product.title }}</h2>
+                <p class="product-card__price">{{ product.price | money }}</p>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+        {%- if paginate.pages > 1 -%}
+          <nav class="main-collection__pagination">{{ paginate | default_pagination }}</nav>
+        {%- endif -%}
+      {%- else -%}
+        <p style="text-align:center;color:var(--color-text-muted);">No products found.</p>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection",
+  "tag": "section",
+  "class": "section-main-collection",
+  "settings": []
+}
+{% endschema %}

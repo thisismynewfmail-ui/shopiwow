@@ -1,0 +1,182 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "MEDVi Weight Loss",
+    "theme_version": "2.0.0",
+    "theme_author": "MEDVi",
+    "theme_documentation_url": "https://help.shopify.com/",
+    "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "Logo & Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Site Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo width (px)",
+        "min": 80,
+        "max": 320,
+        "step": 10,
+        "default": 200
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary (brand navy)",
+        "default": "#121231"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary (deep navy)",
+        "default": "#1a1a3e"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent (teal CTA)",
+        "default": "#08a88a"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_hover",
+        "label": "Accent Hover",
+        "default": "#069b7a"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_background_alt",
+        "label": "Alt Background (warm sand)",
+        "default": "#f8f6f5"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text",
+        "default": "#121231"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "Muted Text",
+        "default": "#666666"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "assistant_n7"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "assistant_n4"
+      }
+    ]
+  },
+  {
+    "name": "Conversion Boosters",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Proof Notifications"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_social_proof",
+        "label": "Enable social proof notifications",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "social_proof_message",
+        "label": "Default social proof message",
+        "default": "just started their weight loss journey!"
+      },
+      {
+        "type": "range",
+        "id": "social_proof_frequency",
+        "label": "Notification frequency (seconds)",
+        "min": 5,
+        "max": 60,
+        "step": 5,
+        "default": 15
+      },
+      {
+        "type": "header",
+        "content": "Scarcity / Countdown"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_countdown",
+        "label": "Enable countdown timer in announcement bar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "countdown_text",
+        "label": "Countdown label",
+        "default": "Spring pricing ends in:"
+      },
+      {
+        "type": "range",
+        "id": "countdown_hours",
+        "label": "Countdown window (hours)",
+        "min": 1,
+        "max": 72,
+        "step": 1,
+        "default": 12
+      }
+    ]
+  },
+  {
+    "name": "Contact Info",
+    "settings": [
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Email",
+        "default": "help@medvi.org"
+      },
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Phone",
+        "default": "(323) 690-1564"
+      },
+      {
+        "type": "text",
+        "id": "contact_address",
+        "label": "Address",
+        "default": "131 Continental Dr. Ste 305, Newark, DE 19713"
+      }
+    ]
+  }
+]

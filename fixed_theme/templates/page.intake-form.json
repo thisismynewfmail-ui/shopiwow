@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "intake": {
+      "type": "medvi-intake",
+      "settings": {
+        "title": "Get started with",
+        "subtitle": "Answer a few quick questions to see if you qualify for GLP-1 medication — reviewed by a licensed provider within 24 hours."
+      }
+    }
+  },
+  "order": ["intake"]
+}

@@ -1,0 +1,145 @@
+{%- style -%}
+  .medvi-faq {
+    padding: 5rem 0;
+    background: #fff;
+  }
+  .medvi-faq__container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .medvi-faq__header { text-align: center; margin-bottom: 2.5rem; }
+  .medvi-faq__title {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+  }
+
+  .medvi-faq__item {
+    border-bottom: 1px solid #e4dcd8;
+    padding: 1.25rem 0;
+  }
+  .medvi-faq__item:first-child { border-top: 1px solid #e4dcd8; }
+
+  .medvi-faq__q {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 0;
+    padding: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--color-primary);
+  }
+  .medvi-faq__q h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  .medvi-faq__icon {
+    width: 24px; height: 24px; position: relative; flex-shrink: 0; margin-left: 1rem;
+  }
+  .medvi-faq__icon::before,
+  .medvi-faq__icon::after {
+    content: '';
+    position: absolute;
+    background: var(--color-primary);
+    transition: transform 0.3s ease;
+    border-radius: 1px;
+  }
+  .medvi-faq__icon::before { width: 2px; height: 14px; top: 5px; left: 11px; }
+  .medvi-faq__icon::after  { width: 14px; height: 2px; top: 11px; left: 5px; }
+
+  .medvi-faq__a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  .medvi-faq__a-inner {
+    padding: 0.75rem 0 0.25rem;
+    color: #555;
+    line-height: 1.7;
+    font-size: 0.98rem;
+  }
+  .medvi-faq__a-inner p { margin: 0 0 0.5rem; }
+
+  .medvi-faq__item.is-open .medvi-faq__a { max-height: 500px; }
+  .medvi-faq__item.is-open .medvi-faq__icon::before { transform: rotate(90deg); }
+{%- endstyle -%}
+
+<section class="medvi-faq" id="faq">
+  <div class="medvi-faq__container">
+    <div class="medvi-faq__header">
+      <h2 class="medvi-faq__title">{{ section.settings.title | default: 'Frequently Asked Questions' }}</h2>
+    </div>
+
+    <div class="medvi-faq__list" data-medvi-faq>
+      {%- for block in section.blocks -%}
+        <div class="medvi-faq__item" {{ block.shopify_attributes }}>
+          <button type="button" class="medvi-faq__q" aria-expanded="false">
+            <h3>{{ block.settings.question }}</h3>
+            <span class="medvi-faq__icon" aria-hidden="true"></span>
+          </button>
+          <div class="medvi-faq__a">
+            <div class="medvi-faq__a-inner">{{ block.settings.answer }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    document.querySelectorAll('[data-medvi-faq] .medvi-faq__item').forEach(function (item) {
+      var btn = item.querySelector('.medvi-faq__q');
+      btn.addEventListener('click', function () {
+        var open = item.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "section",
+  "class": "section-faq",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Frequently Asked Questions" }
+  ],
+  "max_blocks": 20,
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Answer.</p>" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "faq", "settings": { "question": "How much does the program cost?", "answer": "<p>The MEDVi Semaglutide program starts at $179 for your first month with no contract. This cost covers your physician review, full personalized plan, 1:1 guidance, metabolic report, and the cost of the prescription medication shipped right to your door. Refills are locked in at $299 and include all the same program benefits.</p>" } },
+      { "type": "faq", "settings": { "question": "Will this work for me?", "answer": "<p>Our providers will explore prescribing compounded GLP-1 medications for you, if appropriate — with effective, GLP-1 ingredients. Compounded medication can provide incredible results, using the same active ingredients.</p>" } },
+      { "type": "faq", "settings": { "question": "What if my insurance doesn't cover the medication?", "answer": "<p>All MEDVi prescriptions are cash-pay; your insurance may reimburse you for branded options. We keep compounded medications fairly priced so no insurance is necessary while still working toward your goal weight.</p>" } },
+      { "type": "faq", "settings": { "question": "What can I expect after I sign up?", "answer": "<p>After you complete your online visit, our medical providers review your answers and determine whether treatment may be right for you. If appropriate, you'll be prescribed medication which ships right from the pharmacy to your door.</p>" } }
+    ]
+  },
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "How much does the program cost?", "answer": "<p>Starts at $179 for your first month, no contract. Refills are $299 and include all program benefits.</p>" } },
+        { "type": "faq", "settings": { "question": "Will this work for me?", "answer": "<p>Providers may prescribe compounded GLP-1 medications with the same active ingredients.</p>" } },
+        { "type": "faq", "settings": { "question": "What if my insurance doesn't cover the medication?", "answer": "<p>All prescriptions are cash-pay; no insurance is required.</p>" } },
+        { "type": "faq", "settings": { "question": "What can I expect after I sign up?", "answer": "<p>Licensed providers review your info and, if approved, ship medication to your door.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

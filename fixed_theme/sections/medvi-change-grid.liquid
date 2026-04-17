@@ -1,0 +1,216 @@
+{%- style -%}
+  .medvi-change {
+    padding: 5rem 0;
+    background: var(--color-background-alt);
+  }
+  .medvi-change__layout {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .medvi-change__title {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+  .medvi-change__title em { color: var(--color-accent); font-style: normal; }
+  .medvi-change__sub {
+    color: var(--color-text-muted);
+    margin-bottom: 1.75rem;
+    max-width: 480px;
+  }
+  .medvi-change__bullets {
+    display: grid;
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.75rem;
+  }
+  .medvi-change__bullets li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .medvi-change__bullets li::before {
+    content: '✓';
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  .medvi-change__disclaimer {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .medvi-change__calc {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    margin-top: 1.5rem;
+    max-width: 420px;
+  }
+  .medvi-change__calc label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  .medvi-change__calc-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .medvi-change__calc input[type=range] {
+    flex: 1;
+    accent-color: var(--color-accent);
+  }
+  .medvi-change__calc-value {
+    min-width: 70px;
+    text-align: right;
+    font-weight: 800;
+    color: var(--color-primary);
+    font-size: 1.1rem;
+  }
+  .medvi-change__calc-result {
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: #e8f5f3;
+    border-radius: 10px;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+  .medvi-change__calc-result strong {
+    color: var(--color-accent);
+    font-size: 1.3rem;
+  }
+
+  .medvi-change__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .medvi-change__grid-item {
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    position: relative;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+  }
+  .medvi-change__grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .medvi-change__grid-item:nth-child(1) { aspect-ratio: 3 / 4.5; }
+  .medvi-change__grid-item:nth-child(4) { aspect-ratio: 3 / 4.5; }
+  .medvi-change__grid-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(255,255,255,0.95);
+    color: var(--color-primary);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  @media (max-width: 900px) {
+    .medvi-change__layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+{%- endstyle -%}
+
+<section class="medvi-change" id="results">
+  <div class="container">
+    <div class="medvi-change__layout">
+      <div class="medvi-change__content">
+        <h2 class="medvi-change__title">
+          {{ section.settings.title | default: "The change we've all been" }} <em>{{ section.settings.title_highlight | default: 'waiting for.' }}</em>
+        </h2>
+        <p class="medvi-change__sub">
+          {{ section.settings.subtitle | default: "Join the over 500,000 MEDVi patients and we'll help you finally get real, lasting results." }}
+        </p>
+        <ul class="medvi-change__bullets">
+          <li>6x more weight loss than exercise and diet alone</li>
+          <li>Lose an average of 18% of your body weight</li>
+          <li>93% kept the weight off for good</li>
+          <li>Backed by FDA-regulated pharmacies</li>
+        </ul>
+        <p class="medvi-change__disclaimer">Data based on MEDVi patients over their first 6 months of treatment.</p>
+
+        <div class="medvi-change__calc" aria-label="Weight loss potential calculator">
+          <label for="medviWeight">Select your current weight</label>
+          <div class="medvi-change__calc-row">
+            <input type="range" id="medviWeight" min="120" max="400" step="5" value="200">
+            <span class="medvi-change__calc-value" id="medviWeightOut">200 lbs</span>
+          </div>
+          <div class="medvi-change__calc-result">
+            Your weight-loss potential with MEDVi: <strong id="medviWeightLoss">46 lbs</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="medvi-change__grid" aria-hidden="true">
+        <div class="medvi-change__grid-item">
+          <img src="{{ 'change-grid-4.jpg' | asset_url }}" alt="Patient transformation">
+          <span class="medvi-change__grid-badge">Lost 46 lbs</span>
+        </div>
+        <div class="medvi-change__grid-item">
+          <img src="{{ 'change-grid-5.jpg' | asset_url }}" alt="Patient result">
+          <span class="medvi-change__grid-badge">Lost 28 lbs</span>
+        </div>
+        <div class="medvi-change__grid-item">
+          <img src="{{ 'change-grid-9.jpg' | asset_url }}" alt="Patient result">
+          <span class="medvi-change__grid-badge">Lost 52 lbs</span>
+        </div>
+        <div class="medvi-change__grid-item">
+          <img src="{{ 'change-grid-10.jpg' | asset_url }}" alt="Patient result">
+          <span class="medvi-change__grid-badge">Lost 34 lbs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    var slider = document.getElementById('medviWeight');
+    var out = document.getElementById('medviWeightOut');
+    var result = document.getElementById('medviWeightLoss');
+    if (!slider || !out || !result) return;
+    function update() {
+      var v = parseInt(slider.value, 10);
+      out.textContent = v + ' lbs';
+      result.textContent = Math.round(v * 0.23) + ' lbs';
+    }
+    slider.addEventListener('input', update);
+    update();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Change Grid",
+  "tag": "section",
+  "class": "section-change",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "The change we've all been" },
+    { "type": "text", "id": "title_highlight", "label": "Title highlight", "default": "waiting for." },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Join the over 500,000 MEDVi patients and we'll help you finally get real, lasting results." }
+  ],
+  "presets": [ { "name": "Change Grid" } ]
+}
+{% endschema %}

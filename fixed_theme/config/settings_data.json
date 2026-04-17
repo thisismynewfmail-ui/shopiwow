@@ -1,0 +1,48 @@
+{
+  "current": {
+    "color_primary": "#121231",
+    "color_secondary": "#1a1a3e",
+    "color_accent": "#08a88a",
+    "color_accent_hover": "#069b7a",
+    "color_background": "#ffffff",
+    "color_background_alt": "#f8f6f5",
+    "color_text": "#121231",
+    "color_text_muted": "#666666",
+    "font_heading": "assistant_n7",
+    "font_body": "assistant_n4",
+    "logo_width": 200,
+    "enable_social_proof": true,
+    "social_proof_message": "just started their weight loss journey!",
+    "social_proof_frequency": 15,
+    "enable_countdown": true,
+    "countdown_text": "Spring pricing ends in:",
+    "countdown_hours": 12,
+    "contact_email": "help@medvi.org",
+    "contact_phone": "(323) 690-1564",
+    "contact_address": "131 Continental Dr. Ste 305, Newark, DE 19713"
+  },
+  "presets": {
+    "MEDVi Default": {
+      "color_primary": "#121231",
+      "color_secondary": "#1a1a3e",
+      "color_accent": "#08a88a",
+      "color_accent_hover": "#069b7a",
+      "color_background": "#ffffff",
+      "color_background_alt": "#f8f6f5",
+      "color_text": "#121231",
+      "color_text_muted": "#666666",
+      "font_heading": "assistant_n7",
+      "font_body": "assistant_n4",
+      "logo_width": 200,
+      "enable_social_proof": true,
+      "social_proof_message": "just started their weight loss journey!",
+      "social_proof_frequency": 15,
+      "enable_countdown": true,
+      "countdown_text": "Spring pricing ends in:",
+      "countdown_hours": 12,
+      "contact_email": "help@medvi.org",
+      "contact_phone": "(323) 690-1564",
+      "contact_address": "131 Continental Dr. Ste 305, Newark, DE 19713"
+    }
+  }
+}
