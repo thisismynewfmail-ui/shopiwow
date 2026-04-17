@@ -1,0 +1,258 @@
+{%- style -%}
+  .medvi-footer {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 4rem 0 2rem;
+    font-family: var(--font-body);
+  }
+  .medvi-footer__container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+
+  .medvi-footer__features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .medvi-footer__feature {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .medvi-footer__feature img {
+    width: 40px; height: 40px;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+  }
+  .medvi-footer__feature-text {
+    color: rgba(255,255,255,0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .medvi-footer__top {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .medvi-footer__brand { display: flex; flex-direction: column; gap: 1rem; }
+  .medvi-footer__logo img { max-width: 200px; filter: brightness(0) invert(1); }
+  .medvi-footer__tagline {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    max-width: 340px;
+  }
+  .medvi-footer__links {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .medvi-footer__column h4 {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .medvi-footer__column ul { list-style: none; margin: 0; padding: 0; }
+  .medvi-footer__column li { margin-bottom: 0.5rem; }
+  .medvi-footer__column a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.25s ease;
+  }
+  .medvi-footer__column a:hover { color: var(--color-accent); }
+
+  .medvi-footer__contact { display: flex; flex-direction: column; gap: 0.75rem; }
+  .medvi-footer__contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.88rem;
+  }
+  .medvi-footer__contact-item img {
+    width: 18px; height: 18px;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+  }
+
+  .medvi-footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .medvi-footer__copyright { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
+  .medvi-footer__legal {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .medvi-footer__legal a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.25s ease;
+  }
+  .medvi-footer__legal a:hover { color: var(--color-accent); }
+
+  @media (max-width: 900px) {
+    .medvi-footer__top { grid-template-columns: 1fr; }
+    .medvi-footer__links { grid-template-columns: repeat(2, 1fr); }
+    .medvi-footer__features { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .medvi-footer__features { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .medvi-footer__bottom { flex-direction: column; text-align: center; }
+  }
+{%- endstyle -%}
+
+<footer class="medvi-footer">
+  <div class="medvi-footer__container">
+    <div class="medvi-footer__features">
+      <div class="medvi-footer__feature">
+        <img src="{{ 'icn-guarantee.svg' | asset_url }}" alt="">
+        <div class="medvi-footer__feature-text">MEDVi Guarantee</div>
+      </div>
+      <div class="medvi-footer__feature">
+        <img src="{{ 'icn-shipping.svg' | asset_url }}" alt="">
+        <div class="medvi-footer__feature-text">Free, expedited delivery</div>
+      </div>
+      <div class="medvi-footer__feature">
+        <img src="{{ 'icn-doctor.svg' | asset_url }}" alt="">
+        <div class="medvi-footer__feature-text">Doctor-led plans &amp; coaching</div>
+      </div>
+      <div class="medvi-footer__feature">
+        <img src="{{ 'icn-fees.svg' | asset_url }}" alt="">
+        <div class="medvi-footer__feature-text">No hidden fees</div>
+      </div>
+    </div>
+
+    <div class="medvi-footer__top">
+      <div class="medvi-footer__brand">
+        <a href="{{ routes.root_url }}" class="medvi-footer__logo">
+          {%- if section.settings.logo != blank -%}
+            <img src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}">
+          {%- else -%}
+            <img src="{{ 'medvi-logo-soil.png' | asset_url }}" alt="{{ shop.name }}">
+          {%- endif -%}
+        </a>
+        <p class="medvi-footer__tagline">{{ section.settings.tagline | default: 'Personalized weight loss solutions from MEDVi. Achievable and maintainable weight loss with individualized, medically-guided programs that fit your life.' }}</p>
+      </div>
+
+      <div class="medvi-footer__links">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'column' -%}
+            <div class="medvi-footer__column" {{ block.shopify_attributes }}>
+              <h4>{{ block.settings.heading }}</h4>
+              <ul>
+                {%- assign links = block.settings.links | newline_to_br | split: '<br />' -%}
+                {%- for entry in links -%}
+                  {%- assign parts = entry | strip | split: '|' -%}
+                  {%- if parts.size == 2 -%}
+                    <li><a href="{{ parts[1] | strip }}">{{ parts[0] | strip }}</a></li>
+                  {%- elsif parts.size == 1 and parts[0] != '' -%}
+                    <li><a href="#">{{ parts[0] | strip }}</a></li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- elsif block.type == 'contact' -%}
+            <div class="medvi-footer__column medvi-footer__contact" {{ block.shopify_attributes }}>
+              <h4>{{ block.settings.heading | default: 'Contact' }}</h4>
+              <div class="medvi-footer__contact-item">
+                <img src="{{ 'icn-email.svg' | asset_url }}" alt="">
+                <span>{{ settings.contact_email }}</span>
+              </div>
+              <div class="medvi-footer__contact-item">
+                <img src="{{ 'icn-phone.svg' | asset_url }}" alt="">
+                <span>{{ settings.contact_phone }}</span>
+              </div>
+              <div class="medvi-footer__contact-item">
+                <img src="{{ 'icn-address.svg' | asset_url }}" alt="">
+                <span>{{ settings.contact_address }}</span>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="medvi-footer__bottom">
+      <div class="medvi-footer__copyright">© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</div>
+      <div class="medvi-footer__legal">
+        {%- assign legal = section.settings.legal_links | newline_to_br | split: '<br />' -%}
+        {%- for entry in legal -%}
+          {%- assign parts = entry | strip | split: '|' -%}
+          {%- if parts.size == 2 -%}
+            <a href="{{ parts[1] | strip }}">{{ parts[0] | strip }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "section",
+  "class": "section-footer",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Footer logo" },
+    { "type": "textarea", "id": "tagline", "label": "Tagline", "default": "Personalized weight loss solutions from MEDVi. Achievable and maintainable weight loss with individualized, medically-guided programs that fit your life." },
+    {
+      "type": "textarea", "id": "legal_links", "label": "Legal links (one per line, format: Label|/url)",
+      "default": "Terms & Conditions|/policies/terms-of-service\nPrivacy Policy|/policies/privacy-policy\nRefund Policy|/policies/refund-policy\nShipping Policy|/policies/shipping-policy\nMedical Consent|/pages/medical-consent\nFor California Residents|/pages/privacy-statement-california\nBill of Rights|/pages/bill-of-rights"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Link column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Products" },
+        { "type": "textarea", "id": "links", "label": "Links (one per line, format: Label|/url)", "default": "GLP-1 Injections|/#products\nGLP-1 Tablets|/#products\nWegovy® Pill|/#products\nWegovy® Injection|/#products\nZepbound® Injection|/#products" }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "Contact",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Contact" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "column", "settings": { "heading": "Products", "links": "GLP-1 Injections|/#products\nGLP-1 Tablets|/#products\nWegovy® Pill|/#products\nWegovy® Injection|/#products\nZepbound® Injection|/#products" } },
+      { "type": "column", "settings": { "heading": "Company", "links": "How It Works|/#metabolism\nFAQ|/#faq\nTestimonials|/#reviews\nJourney|/#journey\nGuarantee|/#guarantee" } },
+      { "type": "column", "settings": { "heading": "Resources", "links": "Blog|/blogs/news\nPricing|/#products\nGet Started|/pages/intake-form" } },
+      { "type": "contact", "settings": { "heading": "Contact" } }
+    ]
+  },
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "column", "settings": { "heading": "Products" } },
+        { "type": "column", "settings": { "heading": "Company" } },
+        { "type": "column", "settings": { "heading": "Resources" } },
+        { "type": "contact", "settings": { "heading": "Contact" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

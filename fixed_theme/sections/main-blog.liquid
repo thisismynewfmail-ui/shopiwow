@@ -1,0 +1,62 @@
+{%- style -%}
+  .main-blog { padding: 4rem 0 5rem; }
+  .main-blog__header { text-align: center; margin-bottom: 2.5rem; }
+  .main-blog__title { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; }
+  .main-blog__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .article-card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease;
+  }
+  .article-card:hover { transform: translateY(-3px); }
+  .article-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+  .article-card__body { padding: 1.25rem 1.5rem 1.75rem; }
+  .article-card__title { font-size: 1.15rem; font-weight: 700; color: var(--color-primary); margin: 0 0 0.5rem; }
+  .article-card__excerpt { color: var(--color-text-muted); font-size: 0.95rem; margin: 0; line-height: 1.6; }
+  .article-card__date { font-size: 0.8rem; color: var(--color-accent); font-weight: 600; margin-bottom: 0.25rem; }
+{%- endstyle -%}
+
+<section class="main-blog">
+  <div class="container">
+    <div class="main-blog__header">
+      <h1 class="main-blog__title">{{ blog.title }}</h1>
+    </div>
+    {%- paginate blog.articles by 12 -%}
+      <div class="main-blog__grid">
+        {%- for article in blog.articles -%}
+          <a class="article-card" href="{{ article.url }}">
+            {%- if article.image != blank -%}
+              <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | escape | default: article.title }}" loading="lazy">
+            {%- endif -%}
+            <div class="article-card__body">
+              <div class="article-card__date">{{ article.published_at | date: format: 'month_day_year' }}</div>
+              <h2 class="article-card__title">{{ article.title }}</h2>
+              <p class="article-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 140 }}</p>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav style="margin-top:2.5rem;text-align:center;">{{ paginate | default_pagination }}</nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog",
+  "tag": "section",
+  "class": "section-main-blog",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,191 @@
+{%- style -%}
+  .medvi-journey {
+    padding: 5rem 0;
+    background: #fff;
+  }
+  .medvi-journey__header { margin-bottom: 3rem; max-width: 640px; }
+  .medvi-journey__title {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+  .medvi-journey__title em { color: var(--color-accent); font-style: normal; }
+  .medvi-journey__sub {
+    color: var(--color-text-muted);
+    font-size: 1.02rem;
+  }
+  .medvi-journey__sub strong { color: var(--color-accent); font-weight: 600; }
+
+  .medvi-journey__layout {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .medvi-journey__steps {
+    position: relative;
+    padding-left: 2.5rem;
+  }
+  .medvi-journey__line {
+    position: absolute;
+    left: 9px;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: #e4dcd8;
+  }
+  .medvi-journey__line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--color-accent);
+    height: 0;
+    transition: height 1s ease;
+  }
+  .medvi-journey.in-view .medvi-journey__line::after { height: 100%; }
+
+  .medvi-journey__step { margin-bottom: 2.5rem; position: relative; }
+  .medvi-journey__step:last-child { margin-bottom: 0; }
+  .medvi-journey__step::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid #ccc;
+    transition: border-color 0.4s ease;
+  }
+  .medvi-journey__step::after {
+    content: '';
+    position: absolute;
+    left: calc(-2.5rem + 6px);
+    top: 10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .medvi-journey__step.active::before { border-color: var(--color-accent); }
+  .medvi-journey__step.active::after { opacity: 1; }
+
+  .medvi-journey__step h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .medvi-journey__step p {
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .medvi-journey__gallery {
+    display: grid;
+    gap: 1rem;
+  }
+  .medvi-journey__gallery img {
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  @media (max-width: 900px) {
+    .medvi-journey__layout { grid-template-columns: 1fr; }
+  }
+{%- endstyle -%}
+
+<section class="medvi-journey" id="journey" data-medvi-journey>
+  <div class="container">
+    <div class="medvi-journey__header">
+      <h2 class="medvi-journey__title">
+        {{ section.settings.title | default: 'Begin your weight loss journey with' }} <em>{{ section.settings.title_highlight | default: 'MEDVi.' }}</em>
+      </h2>
+      <p class="medvi-journey__sub">
+        {{ section.settings.subtitle | default: "Start your transformation today with MEDVi's easy, personalized process. Our streamlined approach ensures you're supported <strong>every step of the way</strong>, from approval to receiving your prescription." }}
+      </p>
+    </div>
+
+    <div class="medvi-journey__layout">
+      <div class="medvi-journey__steps">
+        <div class="medvi-journey__line"></div>
+        {%- for block in section.blocks -%}
+          <div class="medvi-journey__step {% if forloop.first %}active{% endif %}" {{ block.shopify_attributes }}>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="medvi-journey__gallery" aria-hidden="true">
+        <img src="{{ 'journey-1.jpg' | asset_url }}" alt="Get Approved" loading="lazy">
+        <img src="{{ 'journey-2.jpg' | asset_url }}" alt="Get Prescribed" loading="lazy">
+        <img src="{{ 'journey-3.jpg' | asset_url }}" alt="Receive your Rx" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    var el = document.querySelector('[data-medvi-journey]');
+    if (!el) return;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          el.classList.add('in-view');
+          el.querySelectorAll('.medvi-journey__step').forEach(function (s) { s.classList.add('active'); });
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.25 });
+    obs.observe(el);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Journey",
+  "tag": "section",
+  "class": "section-journey",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Begin your weight loss journey with" },
+    { "type": "text", "id": "title_highlight", "label": "Title highlight", "default": "MEDVi." },
+    { "type": "richtext", "id": "subtitle", "label": "Subtitle" }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Step" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Short description." }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "step", "settings": { "title": "Get Approved", "text": "Complete a quick online evaluation to determine if GLP-1 medication is right for you. Our licensed professionals review your information and provide approval in no time." } },
+      { "type": "step", "settings": { "title": "Get Prescribed", "text": "Once approved, you receive personalized care and a prescription to support your goals. Your plan is designed to help you achieve lasting results safely and effectively." } },
+      { "type": "step", "settings": { "title": "Receive your Rx", "text": "Your medication is shipped directly to your door for maximum convenience — open, follow the simple instructions, and begin." } }
+    ]
+  },
+  "presets": [
+    {
+      "name": "Journey",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Get Approved", "text": "Complete a quick online evaluation to determine if GLP-1 medication is right for you." } },
+        { "type": "step", "settings": { "title": "Get Prescribed", "text": "Once approved, you receive personalized care and a prescription to support your goals." } },
+        { "type": "step", "settings": { "title": "Receive your Rx", "text": "Your medication is shipped directly to your door for maximum convenience." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

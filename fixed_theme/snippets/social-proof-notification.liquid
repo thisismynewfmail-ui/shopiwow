@@ -1,0 +1,122 @@
+{%- style -%}
+  .social-proof-notification {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    background: #fff;
+    padding: 0.875rem 1.25rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    z-index: 999;
+    transform: translateY(150%);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    max-width: 340px;
+    font-family: var(--font-body);
+  }
+
+  .social-proof-notification.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .social-proof-notification__image {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .social-proof-notification__content { flex: 1; }
+
+  .social-proof-notification__text {
+    font-size: 0.875rem;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .social-proof-notification__text strong { color: var(--color-primary); }
+
+  .social-proof-notification__time {
+    font-size: 0.72rem;
+    color: #999;
+    margin: 0.25rem 0 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    .social-proof-notification {
+      bottom: 1rem;
+      left: 1rem;
+      right: 1rem;
+      max-width: none;
+    }
+  }
+{%- endstyle -%}
+
+<div class="social-proof-notification" id="socialProofNotification" aria-live="polite">
+  <div class="social-proof-notification__image" id="notificationImage">S</div>
+  <div class="social-proof-notification__content">
+    <p class="social-proof-notification__text" id="notificationText">
+      <strong>Sarah M.</strong> {{ settings.social_proof_message }}
+    </p>
+    <p class="social-proof-notification__time">Just now</p>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var names = [
+      'Sarah M.','Jessica T.','Amanda R.','Michelle K.','Emily W.',
+      'Jennifer L.','Ashley B.','Stephanie C.','Nicole P.','Rachel G.',
+      'Megan H.','Lauren D.','Brittany S.','Samantha F.','Kayla M.',
+      'Danielle O.','Heather V.','Courtney J.','Tiffany A.','Melissa R.'
+    ];
+    var locations = [
+      'from Texas','from California','from Florida','from New York',
+      'from Ohio','from Georgia','from Michigan','from Arizona',
+      'from Pennsylvania','from North Carolina','from Illinois','from Tennessee'
+    ];
+    var messages = [
+      'just started their weight loss journey!',
+      'just got approved for GLP-1 medication.',
+      'just unlocked the Spring $179 offer.',
+      'just completed their medical review.',
+      'just reached their goal weight!',
+      'just secured free shipping today.'
+    ];
+
+    var el = document.getElementById('socialProofNotification');
+    var textEl = document.getElementById('notificationText');
+    var imgEl = document.getElementById('notificationImage');
+    if (!el || !textEl || !imgEl) return;
+
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+    function show() {
+      var name = pick(names);
+      var loc = pick(locations);
+      var msg = pick(messages);
+      textEl.innerHTML = '<strong>' + name + '</strong> ' + loc + ' ' + msg;
+      imgEl.textContent = name.charAt(0);
+      el.classList.add('show');
+      setTimeout(function () { el.classList.remove('show'); }, 4500);
+    }
+
+    var freqMs = {{ settings.social_proof_frequency | default: 15 | times: 1000 }};
+    setTimeout(function () {
+      show();
+      setInterval(show, freqMs);
+    }, 4000);
+  })();
+</script>

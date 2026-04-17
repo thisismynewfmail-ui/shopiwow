@@ -1,0 +1,138 @@
+{%- style -%}
+  .medvi-support {
+    padding: 5rem 0;
+    background: var(--color-primary);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .medvi-support::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 85% 15%, rgba(8,168,138,0.3), transparent 45%);
+  }
+  .medvi-support__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .medvi-support__image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+  .medvi-support__title {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  .medvi-support__title em { color: var(--color-accent); font-style: normal; }
+  .medvi-support__text {
+    color: rgba(255,255,255,0.85);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    font-size: 1.02rem;
+  }
+  .medvi-support__features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .medvi-support__feature {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255,255,255,0.07);
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+  }
+  .medvi-support__feature svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    color: var(--color-accent);
+  }
+  .medvi-support__feature span { font-weight: 600; font-size: 0.92rem; }
+
+  .medvi-support__cta {
+    display: inline-block;
+    background: var(--color-accent);
+    color: #fff;
+    padding: 0.9rem 1.75rem;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+  .medvi-support__cta:hover {
+    background: var(--color-accent-hover);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(8,168,138,0.3);
+  }
+
+  @media (max-width: 900px) {
+    .medvi-support__layout { grid-template-columns: 1fr; }
+  }
+{%- endstyle -%}
+
+<section class="medvi-support" id="support">
+  <div class="container">
+    <div class="medvi-support__layout">
+      <div class="medvi-support__image">
+        <img src="{{ 'support-1.jpg' | asset_url }}" alt="MEDVi care specialist" loading="lazy">
+      </div>
+      <div class="medvi-support__body">
+        <h2 class="medvi-support__title">
+          {{ section.settings.title | default: 'Unlimited 24/7 support' }} <em>{{ section.settings.title_highlight | default: 'included.' }}</em>
+        </h2>
+        <p class="medvi-support__text">
+          {{ section.settings.text | default: "MEDVi provides 24/7 access to a dedicated team of specialists, ensuring you have the support you need around the clock — with unlimited appointments, messaging, and guidance." }}
+        </p>
+        <div class="medvi-support__features">
+          <div class="medvi-support__feature">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>Licensed US providers</span>
+          </div>
+          <div class="medvi-support__feature">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>Unlimited messaging</span>
+          </div>
+          <div class="medvi-support__feature">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>Fast, free shipping</span>
+          </div>
+          <div class="medvi-support__feature">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>No hidden fees</span>
+          </div>
+        </div>
+        <a href="{{ section.settings.cta_link | default: '/pages/intake-form' }}" class="medvi-support__cta">
+          {{ section.settings.cta_text | default: 'Start with MEDVi' }} &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Support",
+  "tag": "section",
+  "class": "section-support",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Unlimited 24/7 support" },
+    { "type": "text", "id": "title_highlight", "label": "Title highlight", "default": "included." },
+    { "type": "textarea", "id": "text", "label": "Body", "default": "MEDVi provides 24/7 access to a dedicated team of specialists, ensuring you have the support you need around the clock — with unlimited appointments, messaging, and guidance." },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Start with MEDVi" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "presets": [ { "name": "Support" } ]
+}
+{% endschema %}
