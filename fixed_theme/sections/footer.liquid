@@ -1,0 +1,175 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        {%- if section.settings.logo != blank -%}
+          <img src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ shop.name | escape }}" style="max-width: 180px; filter: brightness(0) invert(1);">
+        {%- else -%}
+          <strong style="font-size:1.5rem;">{{ shop.name }}</strong>
+        {%- endif -%}
+        <p class="mt-md" style="opacity:.85; max-width: 320px;">{{ section.settings.tagline }}</p>
+
+        {%- if section.settings.newsletter_enabled -%}
+          <p class="mt-md" style="font-weight:600; text-transform:uppercase; letter-spacing:.08em; font-size:.8125rem; opacity:.9;">
+            {{ section.settings.newsletter_heading }}
+          </p>
+          {%- form 'customer', class: 'newsletter-form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <label for="NewsletterEmail" class="visually-hidden">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
+            <input id="NewsletterEmail" type="email" name="contact[email]" required placeholder="Email address">
+            <button type="submit">{{ 'general.newsletter_form.button_label' | t }}</button>
+            {%- if form.posted_successfully? -%}
+              <p class="mt-sm" style="opacity:.9;">{{ 'newsletter.success' | t }}</p>
+            {%- endif -%}
+          {%- endform -%}
+        {%- endif -%}
+
+        <div class="socials mt-md">
+          {%- if settings.social_facebook_link != blank -%}<a href="{{ settings.social_facebook_link }}" aria-label="Facebook">{% render 'icon', icon: 'facebook' %}</a>{%- endif -%}
+          {%- if settings.social_instagram_link != blank -%}<a href="{{ settings.social_instagram_link }}" aria-label="Instagram">{% render 'icon', icon: 'instagram' %}</a>{%- endif -%}
+          {%- if settings.social_twitter_link != blank -%}<a href="{{ settings.social_twitter_link }}" aria-label="Twitter">{% render 'icon', icon: 'twitter' %}</a>{%- endif -%}
+          {%- if settings.social_youtube_link != blank -%}<a href="{{ settings.social_youtube_link }}" aria-label="YouTube">{% render 'icon', icon: 'youtube' %}</a>{%- endif -%}
+          {%- if settings.social_tiktok_link != blank -%}<a href="{{ settings.social_tiktok_link }}" aria-label="TikTok">{% render 'icon', icon: 'tiktok' %}</a>{%- endif -%}
+        </div>
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'link_list' -%}
+            <div {{ block.shopify_attributes }}>
+              <h3 class="site-footer__title">{{ block.settings.heading }}</h3>
+              <ul class="site-footer__list">
+                {%- for link in block.settings.menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- when 'text' -%}
+            <div {{ block.shopify_attributes }}>
+              <h3 class="site-footer__title">{{ block.settings.heading }}</h3>
+              <div class="rte" style="opacity:.85;">{{ block.settings.content }}</div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.disclaimer != blank -%}
+      <div class="mt-lg" style="font-size:.8125rem; opacity:.7; line-height:1.6; max-width: 860px;">
+        {{ section.settings.disclaimer }}
+      </div>
+    {%- endif -%}
+
+    <div class="site-footer__bottom">
+      <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
+      <span>{{ powered_by_link }}</span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer logo"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Personalized weight loss, doctor-approved and shipped to your door. Join over 500,000 patients."
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_enabled",
+      "label": "Show newsletter signup",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Get tips, updates, and exclusive offers"
+    },
+    {
+      "type": "richtext",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "<p>*Results vary based on starting weight and program adherence. Medication prescriptions are at the discretion of medical providers and may not be suitable for everyone. MEDVi patients typically result in 1-2 lbs per week weight loss after 4 weeks, involving a healthy diet and exercise changes. Consult a healthcare professional before using medication or starting any weight loss program. The trademarks, service marks, trade names (Wegovy®, Ozempic®), and products displayed are protected and belong to their respective owners.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Quick links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Our Pharmacies"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Triad Rx<br>Daphne, AL</p><p>Precision Medicine<br>Bellmore, NY</p><p>RedRock Pharmacy<br>St. George, UT</p><p>Beaker Pharmacy<br>McKinney, TX</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "default": {
+    "blocks": [
+      {
+        "type": "link_list",
+        "settings": {
+          "heading": "Shop",
+          "menu": "footer"
+        }
+      },
+      {
+        "type": "link_list",
+        "settings": {
+          "heading": "Support",
+          "menu": "footer"
+        }
+      },
+      {
+        "type": "text",
+        "settings": {
+          "heading": "Our Pharmacies",
+          "content": "<p>Triad Rx, Daphne, AL</p><p>Precision Medicine, Bellmore, NY</p><p>RedRock Pharmacy, St. George, UT</p><p>Beaker Pharmacy, McKinney, TX</p>"
+        }
+      }
+    ]
+  },
+  "enabled_on": {
+    "groups": ["footer"]
+  }
+}
+{% endschema %}

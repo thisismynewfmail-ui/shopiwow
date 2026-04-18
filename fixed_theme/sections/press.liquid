@@ -1,0 +1,59 @@
+<section class="press">
+  <div class="container">
+    <p class="press__label">{{ section.settings.label }}</p>
+    <div class="press__logos">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image != blank -%}
+          <img
+            src="{{ block.settings.image | image_url: width: 320 }}"
+            alt="{{ block.settings.image.alt | default: 'Press logo' | escape }}"
+            loading="lazy"
+            {{ block.shopify_attributes }}>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Press logos",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Proud to be featured and advertised in"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Press logos",
+      "category": "Trust",
+      "blocks": [
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,48 @@
+{%- liquid
+  assign show_badge = show_badge | default: true
+  assign show_vendor = show_vendor | default: false
+-%}
+<a href="{{ product.url | default: '#' }}" class="product-card reveal">
+  {%- if show_badge and product.compare_at_price > product.price -%}
+    <span class="product-card__badge pill pill--gold">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+  {%- elsif product.metafields.custom.badge != blank -%}
+    <span class="product-card__badge pill">{{ product.metafields.custom.badge }}</span>
+  {%- elsif badge != blank -%}
+    <span class="product-card__badge pill">{{ badge }}</span>
+  {%- endif -%}
+
+  <div class="product-card__media">
+    {%- if product.featured_image -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.featured_image.alt | escape | default: product.title }}"
+        width="600"
+        height="{{ 600 | divided_by: product.featured_image.aspect_ratio | round }}"
+        loading="lazy">
+    {%- elsif image -%}
+      <img src="{{ image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  <div class="product-card__body">
+    {%- if show_vendor and product.vendor != blank -%}
+      <small class="text-muted">{{ product.vendor }}</small>
+    {%- endif -%}
+    <h3 class="product-card__title">{{ product.title | default: title }}</h3>
+    {%- if product.description != blank and show_description -%}
+      <p class="text-muted">{{ product.description | strip_html | truncatewords: 14 }}</p>
+    {%- endif -%}
+    <div class="product-card__price">
+      {%- if product -%}
+        {%- render 'price', product: product, price_prefix: true -%}
+      {%- else -%}
+        <span>{{ price_override }}</span>
+      {%- endif -%}
+    </div>
+    <span class="product-card__cta btn btn--primary btn--sm">
+      {{ cta_label | default: 'Get started' }}
+      {% render 'icon', icon: 'arrow-right' %}
+    </span>
+  </div>
+</a>

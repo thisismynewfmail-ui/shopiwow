@@ -1,0 +1,38 @@
+<section class="section">
+  <div class="container" style="max-width: 460px;">
+    <header class="section-header">
+      <h1>{{ 'customer.register.title' | t }}</h1>
+    </header>
+
+    {%- form 'create_customer', novalidate: 'novalidate' -%}
+      {%- if form.errors -%}
+        <div class="card mb-md" style="border-color: var(--color-error); color: var(--color-error);">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+      <div class="grid grid--2">
+        <div class="field">
+          <label for="FirstName">{{ 'customer.register.first_name' | t }}</label>
+          <input id="FirstName" type="text" name="customer[first_name]" autocomplete="given-name">
+        </div>
+        <div class="field">
+          <label for="LastName">{{ 'customer.register.last_name' | t }}</label>
+          <input id="LastName" type="text" name="customer[last_name]" autocomplete="family-name">
+        </div>
+      </div>
+      <div class="field">
+        <label for="Email">{{ 'customer.register.email' | t }}</label>
+        <input id="Email" type="email" name="customer[email]" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="Password">{{ 'customer.register.password' | t }}</label>
+        <input id="Password" type="password" name="customer[password]" autocomplete="new-password" required>
+      </div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg">{{ 'customer.register.submit' | t }}</button>
+    {%- endform -%}
+
+    <p class="text-center text-muted mt-lg">
+      Already have an account? <a href="{{ routes.account_login_url }}">{{ 'customer.log_in' | t }}</a>
+    </p>
+  </div>
+</section>

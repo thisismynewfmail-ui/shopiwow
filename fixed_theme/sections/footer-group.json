@@ -1,0 +1,38 @@
+{
+  "name": "Footer group",
+  "type": "footer",
+  "sections": {
+    "trust-bar": {
+      "type": "trust-bar",
+      "settings": {}
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "f1": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Shop",
+            "menu": "footer"
+          }
+        },
+        "f2": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Support",
+            "menu": "footer"
+          }
+        },
+        "f3": {
+          "type": "text",
+          "settings": {
+            "heading": "Our Pharmacies",
+            "content": "<p>Triad Rx &mdash; Daphne, AL</p><p>Precision Medicine &mdash; Bellmore, NY</p><p>RedRock Pharmacy &mdash; St. George, UT</p><p>Beaker Pharmacy &mdash; McKinney, TX</p>"
+          }
+        }
+      },
+      "block_order": ["f1", "f2", "f3"]
+    }
+  },
+  "order": ["trust-bar", "footer"]
+}

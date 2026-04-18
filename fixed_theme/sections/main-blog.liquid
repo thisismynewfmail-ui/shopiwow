@@ -1,0 +1,35 @@
+{%- paginate blog.articles by 9 -%}
+  <section class="section">
+    <div class="container">
+      <header class="section-header">
+        <span class="eyebrow">Journal</span>
+        <h1 class="mt-sm">{{ blog.title }}</h1>
+      </header>
+
+      <div class="grid grid--3">
+        {%- for article in blog.articles -%}
+          <a href="{{ article.url }}" class="card">
+            {%- if article.image -%}
+              <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | default: article.title | escape }}" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; margin-bottom:16px;" loading="lazy">
+            {%- endif -%}
+            <small class="text-muted">{{ article.published_at | date: '%B %d, %Y' }}</small>
+            <h3 class="mt-sm mb-sm">{{ article.title }}</h3>
+            {%- if article.excerpt_or_content -%}
+              <p class="text-muted">{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+            {%- endif -%}
+            <span class="btn btn--ghost btn--sm mt-sm" style="padding-left:0;">Read more {% render 'icon', icon: 'arrow-right' %}</span>
+          </a>
+        {%- endfor -%}
+      </div>
+
+      {% render 'pagination', paginate: paginate %}
+    </div>
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": []
+}
+{% endschema %}

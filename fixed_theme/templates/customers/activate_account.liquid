@@ -1,0 +1,26 @@
+<section class="section">
+  <div class="container" style="max-width: 460px;">
+    <header class="section-header">
+      <h1>{{ 'customer.activate_account.title' | t }}</h1>
+      <p class="text-muted">{{ 'customer.activate_account.subtext' | t }}</p>
+    </header>
+
+    {%- form 'activate_customer_password' -%}
+      {%- if form.errors -%}
+        <div class="card mb-md" style="border-color: var(--color-error); color: var(--color-error);">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+      <div class="field">
+        <label for="NewPassword">{{ 'customer.activate_account.password' | t }}</label>
+        <input id="NewPassword" type="password" name="customer[password]" required>
+      </div>
+      <div class="field">
+        <label for="ConfirmPassword">{{ 'customer.activate_account.password_confirm' | t }}</label>
+        <input id="ConfirmPassword" type="password" name="customer[password_confirmation]" required>
+      </div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg">{{ 'customer.activate_account.submit' | t }}</button>
+      <button type="submit" name="decline" class="btn btn--ghost btn--block mt-sm">{{ 'customer.activate_account.cancel' | t }}</button>
+    {%- endform -%}
+  </div>
+</section>

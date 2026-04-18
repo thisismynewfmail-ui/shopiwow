@@ -1,0 +1,79 @@
+<section class="section">
+  <div class="container">
+    <h1>{{ 'sections.cart.title' | t }}</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate class="cart">
+        <table class="cart-table" style="width:100%; border-collapse: collapse; margin-top: 24px;">
+          <thead>
+            <tr style="text-align:left; border-bottom:1px solid var(--color-border);">
+              <th style="padding:12px 0;">{{ 'sections.cart.headings.product' | t }}</th>
+              <th style="padding:12px 0;">{{ 'sections.cart.headings.quantity' | t }}</th>
+              <th style="padding:12px 0; text-align:right;">{{ 'sections.cart.headings.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for item in cart.items -%}
+              <tr style="border-bottom:1px solid var(--color-border);">
+                <td style="padding:20px 0;">
+                  <div class="flex items-center gap-md">
+                    <div class="cart-item__image">
+                      {%- if item.image -%}
+                        <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}">
+                      {%- endif -%}
+                    </div>
+                    <div>
+                      <a href="{{ item.url }}" class="cart-item__title"><strong>{{ item.product.title }}</strong></a>
+                      {%- if item.variant.title != 'Default Title' -%}
+                        <div class="cart-item__meta">{{ item.variant.title }}</div>
+                      {%- endif -%}
+                      <a href="{{ item.url_to_remove }}" class="cart-item__remove">{{ 'sections.cart.remove_title' | t: title: item.title }}</a>
+                    </div>
+                  </div>
+                </td>
+                <td style="padding:20px 0;">
+                  <div class="qty">
+                    <a href="{{ item.url_to_change | append: '?quantity=' | append: item.quantity | minus: 1 }}" aria-label="Decrease">−</a>
+                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity">
+                    <a href="{{ item.url_to_change | append: '?quantity=' | append: item.quantity | plus: 1 }}" aria-label="Increase">+</a>
+                  </div>
+                </td>
+                <td style="padding:20px 0; text-align:right;"><strong>{{ item.final_line_price | money }}</strong></td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+
+        <div class="flex justify-between items-center mt-lg" style="flex-wrap:wrap; gap:24px;">
+          {%- if settings.show_cart_note -%}
+            <div style="flex:1; min-width:240px;">
+              <label for="CartNote" class="variant-picker__label">{{ 'sections.cart.note' | t }}</label>
+              <textarea id="CartNote" name="note" rows="3" style="width:100%; padding:12px; border-radius:12px; border:1px solid var(--color-border); font-family:inherit;">{{ cart.note }}</textarea>
+            </div>
+          {%- endif -%}
+
+          <div style="text-align:right; min-width:280px;">
+            <div class="flex justify-between mb-sm"><span>{{ 'sections.cart.estimated_total' | t }}</span><strong>{{ cart.total_price | money }}</strong></div>
+            <p class="text-muted" style="font-size:.875rem;">{{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}</p>
+            <div class="flex gap-sm" style="flex-wrap:wrap;">
+              <button type="submit" name="update" class="btn btn--outline">{{ 'sections.cart.update' | t }}</button>
+              <button type="submit" name="checkout" class="btn btn--primary btn--lg">{{ 'sections.cart.checkout' | t }}</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="empty-state">
+        <h3>{{ 'sections.cart.empty' | t }}</h3>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary btn--lg mt-md">{{ 'general.continue_shopping' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}

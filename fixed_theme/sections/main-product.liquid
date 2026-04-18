@@ -1,0 +1,197 @@
+<section class="product">
+  <div class="container">
+    <div class="product__grid">
+      <div class="product-gallery">
+        <div class="product-gallery__main" data-gallery-main>
+          {%- if product.featured_image -%}
+            <img
+              src="{{ product.featured_image | image_url: width: 1200 }}"
+              alt="{{ product.featured_image.alt | default: product.title | escape }}"
+              data-gallery-image>
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="product-gallery__thumbs">
+            {%- for image in product.images -%}
+              <button type="button"
+                class="product-gallery__thumb{% if forloop.first %} is-active{% endif %}"
+                data-gallery-thumb
+                data-src="{{ image | image_url: width: 1200 }}"
+                aria-label="{{ image.alt | default: product.title | escape }}">
+                <img src="{{ image | image_url: width: 160 }}" alt="" loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="product-info">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'vendor' -%}
+              {%- if product.vendor != blank -%}
+                <p class="eyebrow" {{ block.shopify_attributes }}>{{ product.vendor }}</p>
+              {%- endif -%}
+            {%- when 'title' -%}
+              <h1 {{ block.shopify_attributes }}>{{ product.title }}</h1>
+            {%- when 'rating' -%}
+              <div class="flex items-center gap-sm mb-md" {{ block.shopify_attributes }}>
+                <div class="stars" aria-hidden="true"></div>
+                <span class="text-muted" style="font-size:.9375rem;">{{ block.settings.rating_count | default: '4,800+ reviews' }}</span>
+              </div>
+            {%- when 'price' -%}
+              <div {{ block.shopify_attributes }}>
+                <span class="product-info__price">{{ product.selected_or_first_available_variant.price | money }}</span>
+                {%- if product.compare_at_price > product.price -%}
+                  <span class="product-info__price--compare">{{ product.compare_at_price | money }}</span>
+                {%- endif -%}
+                <p class="product-info__meta mt-sm">Free shipping · FSA/HSA reimbursable</p>
+              </div>
+            {%- when 'description' -%}
+              <div class="product-info__description rte" {{ block.shopify_attributes }}>{{ product.description }}</div>
+            {%- when 'checklist' -%}
+              <ul class="check-list" {{ block.shopify_attributes }}>
+                {%- if block.settings.item_1 != blank -%}<li>{{ block.settings.item_1 }}</li>{%- endif -%}
+                {%- if block.settings.item_2 != blank -%}<li>{{ block.settings.item_2 }}</li>{%- endif -%}
+                {%- if block.settings.item_3 != blank -%}<li>{{ block.settings.item_3 }}</li>{%- endif -%}
+                {%- if block.settings.item_4 != blank -%}<li>{{ block.settings.item_4 }}</li>{%- endif -%}
+              </ul>
+            {%- when 'variant_picker' -%}
+              {%- if product.has_only_default_variant == false -%}
+                <form class="variant-picker" {{ block.shopify_attributes }}>
+                  {%- for option in product.options_with_values -%}
+                    <fieldset>
+                      <legend class="variant-picker__label">{{ option.name }}</legend>
+                      <div class="variant-picker__options">
+                        {%- for value in option.values -%}
+                          <label class="variant-picker__option{% if option.selected_value == value %} is-selected{% endif %}">
+                            <input
+                              type="radio"
+                              name="option{{ forloop.parentloop.index }}"
+                              value="{{ value | escape }}"
+                              {% if option.selected_value == value %}checked{% endif %}
+                              style="position:absolute;opacity:0;pointer-events:none;">
+                            {{ value }}
+                          </label>
+                        {%- endfor -%}
+                      </div>
+                    </fieldset>
+                  {%- endfor -%}
+                </form>
+              {%- endif -%}
+            {%- when 'buy_buttons' -%}
+              {%- form 'product', product, class: 'product-form', {{ block.shopify_attributes }} -%}
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                <div class="flex items-center gap-md mb-md">
+                  <div class="qty" data-qty>
+                    <button type="button" data-qty-down aria-label="Decrease">−</button>
+                    <input type="number" name="quantity" value="1" min="1" aria-label="Quantity">
+                    <button type="button" data-qty-up aria-label="Increase">+</button>
+                  </div>
+                  <button type="submit" name="add" class="btn btn--primary btn--lg" style="flex:1;"{% unless product.selected_or_first_available_variant.available %} disabled{% endunless %}>
+                    {%- if product.selected_or_first_available_variant.available -%}
+                      {{ block.settings.cta_label | default: 'Start my plan' }}
+                    {%- else -%}
+                      {{ 'products.product.sold_out' | t }}
+                    {%- endif -%}
+                  </button>
+                </div>
+                {%- if block.settings.subtext != blank -%}
+                  <p class="text-muted" style="font-size:.875rem;">{{ block.settings.subtext }}</p>
+                {%- endif -%}
+              {%- endform -%}
+            {%- when 'benefits' -%}
+              <div class="product-benefits" {{ block.shopify_attributes }}>
+                <div class="product-benefits__item">
+                  <div style="color:var(--color-primary);">{% render 'icon', icon: 'shield' %}</div>
+                  <div>
+                    <strong>{{ block.settings.benefit_1_heading | default: 'MEDVi Guarantee' }}</strong>
+                    <p class="mb-0 text-muted" style="font-size:.8125rem;">{{ block.settings.benefit_1_text | default: 'Confidence from day one.' }}</p>
+                  </div>
+                </div>
+                <div class="product-benefits__item">
+                  <div style="color:var(--color-primary);">{% render 'icon', icon: 'truck' %}</div>
+                  <div>
+                    <strong>{{ block.settings.benefit_2_heading | default: 'Fast free shipping' }}</strong>
+                    <p class="mb-0 text-muted" style="font-size:.8125rem;">{{ block.settings.benefit_2_text | default: 'Direct from a US pharmacy.' }}</p>
+                  </div>
+                </div>
+                <div class="product-benefits__item">
+                  <div style="color:var(--color-primary);">{% render 'icon', icon: 'stethoscope' %}</div>
+                  <div>
+                    <strong>{{ block.settings.benefit_3_heading | default: 'Doctor-reviewed' }}</strong>
+                    <p class="mb-0 text-muted" style="font-size:.8125rem;">{{ block.settings.benefit_3_text | default: 'Every plan, every patient.' }}</p>
+                  </div>
+                </div>
+                <div class="product-benefits__item">
+                  <div style="color:var(--color-primary);">{% render 'icon', icon: 'chat' %}</div>
+                  <div>
+                    <strong>{{ block.settings.benefit_4_heading | default: '24/7 care team' }}</strong>
+                    <p class="mb-0 text-muted" style="font-size:.8125rem;">{{ block.settings.benefit_4_text | default: 'Unlimited messaging.' }}</p>
+                  </div>
+                </div>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product information",
+  "tag": "section",
+  "blocks": [
+    { "type": "vendor", "name": "Vendor" },
+    { "type": "title", "name": "Title" },
+    {
+      "type": "rating",
+      "name": "Rating",
+      "settings": [
+        { "type": "text", "id": "rating_count", "label": "Count text", "default": "4,800+ verified reviews" }
+      ]
+    },
+    { "type": "price", "name": "Price" },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker"
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "settings": [
+        { "type": "text", "id": "cta_label", "label": "Button label", "default": "Start my plan" },
+        { "type": "text", "id": "subtext", "label": "Subtext", "default": "First month $179 · no contract · cancel any time." }
+      ]
+    },
+    { "type": "description", "name": "Description" },
+    {
+      "type": "checklist",
+      "name": "Checklist",
+      "settings": [
+        { "type": "text", "id": "item_1", "label": "Item 1", "default": "Doctor-reviewed, personalized plan" },
+        { "type": "text", "id": "item_2", "label": "Item 2", "default": "Unlimited 24/7 messaging with your care team" },
+        { "type": "text", "id": "item_3", "label": "Item 3", "default": "Free, fast shipping — direct from a US pharmacy" },
+        { "type": "text", "id": "item_4", "label": "Item 4", "default": "No contracts, no hidden fees, cancel any time" }
+      ]
+    },
+    {
+      "type": "benefits",
+      "name": "Trust benefits",
+      "settings": [
+        { "type": "text", "id": "benefit_1_heading", "label": "Benefit 1 heading", "default": "MEDVi Guarantee" },
+        { "type": "text", "id": "benefit_1_text", "label": "Benefit 1 text", "default": "Confidence from day one." },
+        { "type": "text", "id": "benefit_2_heading", "label": "Benefit 2 heading", "default": "Fast free shipping" },
+        { "type": "text", "id": "benefit_2_text", "label": "Benefit 2 text", "default": "Direct from a US pharmacy." },
+        { "type": "text", "id": "benefit_3_heading", "label": "Benefit 3 heading", "default": "Doctor-reviewed" },
+        { "type": "text", "id": "benefit_3_text", "label": "Benefit 3 text", "default": "Every plan, every patient." },
+        { "type": "text", "id": "benefit_4_heading", "label": "Benefit 4 heading", "default": "24/7 care team" },
+        { "type": "text", "id": "benefit_4_text", "label": "Benefit 4 text", "default": "Unlimited messaging." }
+      ]
+    }
+  ]
+}
+{% endschema %}

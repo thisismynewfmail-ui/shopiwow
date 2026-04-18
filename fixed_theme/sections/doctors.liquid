@@ -1,0 +1,64 @@
+<section class="section" id="doctors">
+  <div class="container">
+    <div class="doctors">
+      <div class="doctors__media reveal">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.heading | escape }}" loading="lazy">
+        {%- endif -%}
+      </div>
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h2 class="mt-sm">{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.text }}</p>
+        <ul class="check-list mt-md">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+          {%- endfor -%}
+        </ul>
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="btn btn--primary mt-md">
+            {{ section.settings.cta_label }}
+            {% render 'icon', icon: 'arrow-right' %}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Our Doctors",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Doctors" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Board-certified doctors in your corner." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Your care team is made up of US-licensed providers who adhere to rigorous medical protocols. Every plan is reviewed by a clinician — and they stay with you throughout your journey." },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Meet the team" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Credential",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Our Doctors",
+      "category": "Trust",
+      "blocks": [
+        { "type": "benefit", "settings": { "text": "US-licensed, board-certified clinicians." } },
+        { "type": "benefit", "settings": { "text": "Every plan reviewed — never a copy-paste prescription." } },
+        { "type": "benefit", "settings": { "text": "Ongoing dose adjustments tied to your progress." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,20 @@
+<section class="section">
+  <div class="container">
+    <header class="mb-lg">
+      <a href="{{ routes.account_url }}" class="text-muted" style="font-size:.875rem;">← {{ 'customer.account.return' | t }}</a>
+      <h1 class="mt-sm">{{ 'customer.addresses.title' | t }}</h1>
+    </header>
+
+    <div class="grid grid--2">
+      {%- paginate customer.addresses by 6 -%}
+        {%- for address in customer.addresses -%}
+          <div class="card">
+            <h3>{{ address.first_name }} {{ address.last_name }}{% if address == customer.default_address %} <span class="pill pill--gold">{{ 'customer.addresses.default' | t }}</span>{% endif %}</h3>
+            <address style="font-style:normal; line-height:1.6;">{{ address | format_address }}</address>
+          </div>
+        {%- endfor -%}
+        {% render 'pagination', paginate: paginate %}
+      {%- endpaginate -%}
+    </div>
+  </div>
+</section>

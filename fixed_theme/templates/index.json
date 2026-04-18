@@ -1,0 +1,247 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Doctor-approved · 24/7 support",
+        "heading": "Finally serious about weight loss? Shed your fat with personalized care and GLP-1 medication.",
+        "subheading": "Find the right GLP-1 medication with the confidence that comes from knowing it is doctor-approved and budget-friendly.",
+        "primary_label": "I'm ready — Let's go",
+        "secondary_label": "See how it works",
+        "secondary_link": "#journey",
+        "trust_number": "500,000+",
+        "trust_label": "patients trust MEDVi",
+        "badge_text": "Start for $179"
+      },
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "text": "MEDVi Guarantee — the only thing you'll lose is extra weight." } },
+        "b2": { "type": "benefit", "settings": { "text": "Start for just $179 — no long-term contract." } },
+        "b3": { "type": "benefit", "settings": { "text": "24/7 support from licensed providers, included." } }
+      },
+      "block_order": ["b1", "b2", "b3"]
+    },
+    "press": {
+      "type": "press",
+      "settings": {
+        "label": "Proud to be featured and advertised in"
+      },
+      "blocks": {
+        "l1": { "type": "logo" },
+        "l2": { "type": "logo" },
+        "l3": { "type": "logo" },
+        "l4": { "type": "logo" },
+        "l5": { "type": "logo" },
+        "l6": { "type": "logo" },
+        "l7": { "type": "logo" }
+      },
+      "block_order": ["l1", "l2", "l3", "l4", "l5", "l6", "l7"]
+    },
+    "products": {
+      "type": "featured-products",
+      "settings": {
+        "eyebrow": "Our programs",
+        "heading": "Trusted by experts, priced for you.",
+        "subheading": "Doctor-reviewed programs with fast, free shipping and 24/7 care — starting at just $179."
+      },
+      "blocks": {
+        "p1": {
+          "type": "manual",
+          "settings": {
+            "title": "GLP-1 Injections",
+            "price": "Starting at $179",
+            "description": "The most popular program — personalized weekly dosing with a licensed clinician.",
+            "badge": "Most popular",
+            "badge_style": "gold",
+            "cta_label": "Get started"
+          }
+        },
+        "p2": {
+          "type": "manual",
+          "settings": {
+            "title": "Semaglutide",
+            "price": "$99 membership + medication",
+            "description": "Doctor-prescribed compounded semaglutide, built for sustainable results.",
+            "cta_label": "Continue"
+          }
+        },
+        "p3": {
+          "type": "manual",
+          "settings": {
+            "title": "Tirzepatide Injection",
+            "price": "Prescribed for $279",
+            "description": "Advanced dual-action GLP-1/GIP for patients needing stronger support.",
+            "badge": "Advanced",
+            "cta_label": "Get started"
+          }
+        },
+        "p4": {
+          "type": "manual",
+          "settings": {
+            "title": "GLP-1 Tablets",
+            "price": "Starting at $249",
+            "description": "A daily oral option for patients who prefer pills over injections.",
+            "cta_label": "Get started"
+          }
+        }
+      },
+      "block_order": ["p1", "p2", "p3", "p4"]
+    },
+    "metabolism": {
+      "type": "image-with-text",
+      "settings": {
+        "eyebrow": "Metabolic science",
+        "heading": "We will fix your broken metabolism.",
+        "text": "<p>Traditional diets don't work because nearly 70% of weight is genetically determined. GLP-1 is a naturally occurring hormone that regulates appetite and blood sugar — so you work <em>with</em> your body, not against it.</p><p>Join the 500,000+ MEDVi patients who finally got real, lasting results.</p>",
+        "cta_label": "See if I qualify",
+        "reverse": false
+      }
+    },
+    "stats": {
+      "type": "stats",
+      "settings": {
+        "eyebrow": "The numbers",
+        "heading": "Why so many patients choose MEDVi.",
+        "subheading": "It's not magic — it's metabolic science. And the data doesn't lie."
+      },
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "number_value": "500,000", "number_suffix": "+", "label": "Patients served" } },
+        "s2": { "type": "stat", "settings": { "number_value": "15-20", "number_suffix": "%", "label": "Average body weight lost" } },
+        "s3": { "type": "stat", "settings": { "number_value": "1-2", "number_suffix": " lbs", "label": "Typical weekly loss" } },
+        "s4": { "type": "stat", "settings": { "number_value": "24/7", "number_suffix": "", "label": "Doctor-led support" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"]
+    },
+    "results": {
+      "type": "results-gallery",
+      "settings": {
+        "eyebrow": "Real people · real results",
+        "heading": "The change we've all been waiting for.",
+        "subheading": "On average, MEDVi patients lose 15–20% of their body weight. Join the ones who got their life back."
+      },
+      "blocks": {
+        "r1": { "type": "image", "settings": { "caption": "Lost 47 lbs in 6 months" } },
+        "r2": { "type": "image", "settings": { "caption": "Lost 62 lbs in 8 months" } },
+        "r3": { "type": "image", "settings": { "caption": "Lost 38 lbs in 5 months" } },
+        "r4": { "type": "image", "settings": { "caption": "Lost 54 lbs in 7 months" } },
+        "r5": { "type": "image", "settings": { "caption": "Lost 31 lbs in 4 months" } },
+        "r6": { "type": "image", "settings": { "caption": "Lost 72 lbs in 9 months" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6"]
+    },
+    "journey": {
+      "type": "journey",
+      "settings": {
+        "eyebrow": "What to expect",
+        "heading": "Begin your weight loss journey with MEDVi.",
+        "subheading": "Three simple steps from sign-up to your first dose — no commitment, cancel any time.",
+        "cta_label": "Get approved in minutes"
+      },
+      "blocks": {
+        "j1": { "type": "step", "settings": { "heading": "Get Approved", "text": "Complete a quick online evaluation to determine if GLP-1 medication is right for you. Our team of licensed professionals will review your information and provide approval in no time." } },
+        "j2": { "type": "step", "settings": { "heading": "Get Prescribed", "text": "Once approved, you'll receive personalized care and a prescription to support your weight loss goals. Your plan is designed to help you achieve lasting results safely and effectively." } },
+        "j3": { "type": "step", "settings": { "heading": "Receive Your Rx", "text": "Your medication is shipped directly to your door for maximum convenience. Starting is as simple as opening your package and following our easy-to-use instructions." } }
+      },
+      "block_order": ["j1", "j2", "j3"]
+    },
+    "support": {
+      "type": "support",
+      "settings": {
+        "eyebrow": "Always on, always caring",
+        "heading": "Unlimited 24/7 support included.",
+        "text": "MEDVi provides 24/7 access to a dedicated team of specialists. With unlimited appointments, messaging and support, you can confidently reach out for guidance, ask questions, or address concerns at any time."
+      },
+      "blocks": {
+        "c1": { "type": "feature", "settings": { "icon": "chat", "heading": "Unlimited messaging", "text": "Text your care team any time, 24/7." } },
+        "c2": { "type": "feature", "settings": { "icon": "stethoscope", "heading": "US-licensed providers", "text": "Board-certified clinicians manage every plan." } },
+        "c3": { "type": "feature", "settings": { "icon": "truck", "heading": "Direct-to-door shipping", "text": "Free, fast delivery straight from a US pharmacy." } }
+      },
+      "block_order": ["c1", "c2", "c3"]
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "eyebrow": "Why patients rave",
+        "heading": "There's a reason people are raving about us.",
+        "subheading": "Join the thousands who have trusted MEDVi to help change their lives.",
+        "cta_label": "Read more reviews"
+      },
+      "blocks": {
+        "t1": { "type": "review", "settings": { "name": "Belinda", "meta": "Verified patient · 6 months", "quote": "My experience is very positive. I am doing very well. Slowly and surely reaching my goals with MEDVi's help. They have been very attentive and have provided me with all the resources to be successful." } },
+        "t2": { "type": "review", "settings": { "name": "Greg", "meta": "Verified patient · 8 months", "quote": "I was ready to give up. Wow. I would pay 10x as much if I had to. Dieting days are over. Thanks to the guys at MEDVi for the metabolic fix — game changer." } },
+        "t3": { "type": "review", "settings": { "name": "Melissa", "meta": "Verified patient · 4 months", "quote": "Losing weight without a crazy diet, without cardio… it just felt like magic. I was a snacker, but not anymore. I feel so much better." } },
+        "t4": { "type": "review", "settings": { "name": "Chris", "meta": "Verified patient · 3 months", "quote": "The staff has been so friendly and caring. I didn't expect that! If I call, I get an immediate answer from a real person!" } },
+        "t5": { "type": "review", "settings": { "name": "Terri", "meta": "Verified patient · 7 months", "quote": "The questions are to the point and easy to navigate. I'm able to voice my concerns if needed and ask questions of MEDVi. They are quick to respond and keep me updated on my prescription." } },
+        "t6": { "type": "review", "settings": { "name": "Sandra", "meta": "Verified patient · 5 months", "quote": "MEDVi doctors and staff have been very professional and prompt with any questions I have. I feel in great hands! I'm 13 lbs away from my goal." } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4", "t5", "t6"]
+    },
+    "guarantee": {
+      "type": "guarantee",
+      "settings": {
+        "eyebrow": "MEDVi Guarantee",
+        "heading": "The only thing you'll lose is extra weight.",
+        "text": "With over 500,000+ patients, we're confident you will reach your goal with our personalized program.",
+        "cta_label": "Continue with confidence"
+      }
+    },
+    "doctors": {
+      "type": "doctors",
+      "settings": {
+        "eyebrow": "Our Doctors",
+        "heading": "Board-certified doctors in your corner.",
+        "text": "Your care team is made up of US-licensed providers who adhere to rigorous medical protocols. Every plan is reviewed by a clinician — and they stay with you throughout your journey.",
+        "cta_label": "Meet the team"
+      },
+      "blocks": {
+        "d1": { "type": "benefit", "settings": { "text": "US-licensed, board-certified clinicians." } },
+        "d2": { "type": "benefit", "settings": { "text": "Every plan reviewed — never a copy-paste prescription." } },
+        "d3": { "type": "benefit", "settings": { "text": "Ongoing dose adjustments tied to your progress." } },
+        "d4": { "type": "benefit", "settings": { "text": "Privacy-first: your data never leaves our care platform." } }
+      },
+      "block_order": ["d1", "d2", "d3", "d4"]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "eyebrow": "Frequently asked",
+        "heading": "Frequently Asked Questions"
+      },
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "How much does the program cost?", "answer": "<p>The MEDVi Semaglutide program starts at $179 for your first month with no contract. This covers your physician review, full personalized plan, 1:1 guidance, metabolic report, and the cost of the medication shipped to your door. Refills are locked in at $299 and include all the same program benefits.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "Will this work for me?", "answer": "<p>Our providers explore prescribing compounded GLP-1 medications for you, if appropriate. Compounded medication can provide incredible results using active GLP-1 ingredients that help you reach your goals.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "What if my insurance doesn't cover the medication?", "answer": "<p>All MEDVi prescriptions are cash-pay, so you never deal with insurance headaches. Your insurance may reimburse you for branded options, and we keep compounded medications fairly priced so no insurance is necessary.</p>" } },
+        "q4": { "type": "faq", "settings": { "question": "What can I expect after I sign up?", "answer": "<p>After your online visit, our medical providers review your answers and determine whether treatment may be right for you. If appropriate, your prescription ships directly from the pharmacy to your door.</p>" } },
+        "q5": { "type": "faq", "settings": { "question": "Is the medication FDA-approved?", "answer": "<p>Wegovy® is FDA-approved for weight loss; Ozempic® is FDA-approved for type 2 diabetes. Compounded GLP-1s are produced in FDA-regulated facilities, though the compounds themselves are not FDA-evaluated. Your clinician will review the specific risks and benefits with you.</p>" } },
+        "q6": { "type": "faq", "settings": { "question": "Can I cancel at any time?", "answer": "<p>Yes. There's no contract and no commitment — pause or cancel whenever you like from your MEDVi account.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"]
+    },
+    "final-cta": {
+      "type": "final-cta",
+      "settings": {
+        "eyebrow": "Your next chapter",
+        "heading": "What's your weight loss goal?",
+        "text": "See if you qualify in under 3 minutes. No contract, free shipping, unlimited support — and a doctor-led plan waiting for you.",
+        "primary_label": "Get started — $179 first month",
+        "secondary_label": "See how it works",
+        "secondary_link": "#journey",
+        "micro_copy": "FSA/HSA reimbursable · Free, fast shipping · Cancel any time"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "press",
+    "products",
+    "metabolism",
+    "stats",
+    "results",
+    "journey",
+    "support",
+    "testimonials",
+    "guarantee",
+    "doctors",
+    "faq",
+    "final-cta"
+  ]
+}

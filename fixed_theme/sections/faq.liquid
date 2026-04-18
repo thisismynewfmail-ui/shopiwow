@@ -1,0 +1,57 @@
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-header">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h2 class="mt-sm">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="faq" data-faq>
+      {%- for block in section.blocks -%}
+        <div class="faq__item" {{ block.shopify_attributes }}>
+          <button type="button" class="faq__question" aria-expanded="false" data-faq-trigger>
+            <span>{{ block.settings.question }}</span>
+            <span class="faq__question-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq__answer" data-faq-answer>
+            <div class="faq__answer-inner rte">{{ block.settings.answer }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Frequently asked" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How much does the program cost?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>The MEDVi Semaglutide program starts at $179 for your first month with no contract. This covers your physician review, full personalized plan, 1:1 guidance, metabolic report, and the cost of the medication shipped to your door. Refills are locked in at $299 and include all the same program benefits.</p>" }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "FAQ",
+      "category": "Content",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "How much does the program cost?", "answer": "<p>The MEDVi Semaglutide program starts at $179 for your first month with no contract. This covers your physician review, full personalized plan, 1:1 guidance, metabolic report, and the cost of the medication shipped to your door. Refills are locked in at $299 and include all the same program benefits.</p>" } },
+        { "type": "faq", "settings": { "question": "Will this work for me?", "answer": "<p>Our providers explore prescribing compounded GLP-1 medications for you, if appropriate. Compounded medication can provide incredible results using active GLP-1 ingredients that help you reach your goals.</p>" } },
+        { "type": "faq", "settings": { "question": "What if my insurance doesn't cover the medication?", "answer": "<p>All MEDVi prescriptions are cash-pay, so you never deal with insurance headaches. Your insurance may reimburse you for branded options, and we keep compounded medications fairly priced so no insurance is necessary.</p>" } },
+        { "type": "faq", "settings": { "question": "What can I expect after I sign up?", "answer": "<p>After your online visit, our medical providers review your answers and determine whether treatment may be right for you. If appropriate, your prescription ships directly from the pharmacy to your door.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

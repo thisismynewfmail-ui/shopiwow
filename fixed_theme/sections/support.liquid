@@ -1,0 +1,99 @@
+<section class="section" id="support" style="background: var(--color-sand-light);">
+  <div class="container">
+    <div class="support">
+      <div class="support__image reveal">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.heading | escape }}" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'support-1.jpg' | asset_url }}" alt="24/7 MEDVi support" loading="lazy">
+        {%- endif -%}
+      </div>
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h2 class="mt-sm">{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.text }}</p>
+        <div class="support__list">
+          {%- for block in section.blocks -%}
+            <div class="support__chip" {{ block.shopify_attributes }}>
+              <div style="width:44px;height:44px;border-radius:50%;background:var(--color-mint-light,#F1F5E9);display:flex;align-items:center;justify-content:center;color:var(--color-primary);">
+                {% render 'icon', icon: block.settings.icon %}
+              </div>
+              <div>
+                <strong>{{ block.settings.heading }}</strong>
+                <span>{{ block.settings.text }}</span>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "24/7 Support",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Always on, always caring"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Unlimited 24/7 support included."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "MEDVi provides 24/7 access to a dedicated team of specialists. With unlimited appointments, messaging and support, you can confidently reach out for guidance, ask questions, or address concerns at any time."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "chat",
+          "options": [
+            { "value": "chat", "label": "Chat" },
+            { "value": "stethoscope", "label": "Stethoscope" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "truck", "label": "Truck" }
+          ]
+        },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Real humans, real fast" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Chat or call — you'll reach a clinician, not a bot." }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "24/7 Support",
+      "category": "Trust",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "chat", "heading": "Unlimited messaging", "text": "Text your care team any time, 24/7." } },
+        { "type": "feature", "settings": { "icon": "stethoscope", "heading": "US-licensed providers", "text": "Board-certified clinicians manage every plan." } },
+        { "type": "feature", "settings": { "icon": "truck", "heading": "Direct-to-door shipping", "text": "Free, fast delivery straight from a US pharmacy." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

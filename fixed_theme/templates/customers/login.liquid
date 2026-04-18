@@ -1,0 +1,31 @@
+<section class="section">
+  <div class="container" style="max-width: 460px;">
+    <header class="section-header">
+      <h1>{{ 'customer.login_page.title' | t }}</h1>
+    </header>
+
+    {%- form 'customer_login', novalidate: 'novalidate' -%}
+      {%- if form.errors -%}
+        <div class="card mb-md" style="border-color: var(--color-error); color: var(--color-error);">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+      <div class="field">
+        <label for="CustomerEmail">{{ 'customer.login_page.email' | t }}</label>
+        <input id="CustomerEmail" type="email" name="customer[email]" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="CustomerPassword">{{ 'customer.login_page.password' | t }}</label>
+        <input id="CustomerPassword" type="password" name="customer[password]" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn--primary btn--block btn--lg">{{ 'customer.login_page.sign_in' | t }}</button>
+      <p class="text-center mt-md">
+        <a href="{{ routes.account_recover_url }}">{{ 'customer.login_page.forgot_password' | t }}</a>
+      </p>
+    {%- endform -%}
+
+    <p class="text-center text-muted mt-lg">
+      New here? <a href="{{ routes.account_register_url }}">{{ 'customer.login_page.create_account' | t }}</a>
+    </p>
+  </div>
+</section>

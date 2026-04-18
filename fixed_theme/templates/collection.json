@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": { "products_per_page": 16 }
+    },
+    "trust": {
+      "type": "trust-bar",
+      "blocks": {
+        "t1": { "type": "item", "settings": { "icon": "shield", "heading": "MEDVi Guarantee", "text": "Risk-free, confidence-first." } },
+        "t2": { "type": "item", "settings": { "icon": "stethoscope", "heading": "Board-certified doctors", "text": "Every plan reviewed by a clinician." } },
+        "t3": { "type": "item", "settings": { "icon": "truck", "heading": "Fast, free shipping", "text": "Direct to your door." } },
+        "t4": { "type": "item", "settings": { "icon": "chat", "heading": "24/7 live support", "text": "Unlimited messaging & appointments." } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"]
+    }
+  },
+  "order": ["main", "trust"]
+}

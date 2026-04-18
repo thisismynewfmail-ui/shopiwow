@@ -1,0 +1,41 @@
+{
+  "current": {
+    "color_background": "#F7F4F0",
+    "color_surface": "#FFFFFF",
+    "color_text": "#38312C",
+    "color_text_muted": "#6B5E55",
+    "color_primary": "#38312C",
+    "color_primary_text": "#FFFFFF",
+    "color_secondary": "#779D7C",
+    "color_secondary_text": "#FFFFFF",
+    "color_accent": "#C6A673",
+    "color_accent_warm": "#F5EEE9",
+    "color_border": "#E6DFD5",
+    "color_success": "#779D7C",
+    "color_error": "#B3261E",
+    "type_header_font": "assistant_n7",
+    "heading_scale": 100,
+    "type_body_font": "assistant_n4",
+    "body_scale": 100,
+    "page_width": 1280,
+    "spacing_sections": 80,
+    "card_radius": 16,
+    "button_radius": 32,
+    "logo_width": 180,
+    "brand_tagline": "Personalized Weight Loss, Doctor-Guided.",
+    "cart_type": "drawer",
+    "show_cart_note": false,
+    "sections": {},
+    "content_for_index": []
+  },
+  "presets": {
+    "MEDVi Bloom": {
+      "color_background": "#F7F4F0",
+      "color_surface": "#FFFFFF",
+      "color_text": "#38312C",
+      "color_primary": "#38312C",
+      "color_secondary": "#779D7C",
+      "color_accent": "#C6A673"
+    }
+  }
+}

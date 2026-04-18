@@ -1,0 +1,33 @@
+{
+  "name": "Header group",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "a1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Free, fast shipping on every order — start for $179, no contract."
+          }
+        },
+        "a2": {
+          "type": "announcement",
+          "settings": {
+            "text": "Over 500,000 patients trust MEDVi for real, lasting weight loss."
+          }
+        }
+      },
+      "block_order": ["a1", "a2"]
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_width": 180,
+        "show_cta": true,
+        "cta_label": "Am I qualified?"
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

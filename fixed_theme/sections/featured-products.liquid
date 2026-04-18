@@ -1,0 +1,166 @@
+<section class="section" id="products">
+  <div class="container">
+    <div class="section-header">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h2 class="mt-sm">{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p>{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="grid grid--4">
+      {%- if section.settings.collection != blank and section.settings.collection.products.size > 0 -%}
+        {%- for product in section.settings.collection.products limit: section.settings.product_limit -%}
+          {% render 'product-card', product: product, cta_label: section.settings.cta_label %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'manual' -%}
+            <a href="{{ block.settings.link | default: '#' }}" class="product-card" {{ block.shopify_attributes }}>
+              {%- if block.settings.badge != blank -%}
+                <span class="product-card__badge pill{% if block.settings.badge_style == 'gold' %} pill--gold{% endif %}">{{ block.settings.badge }}</span>
+              {%- endif -%}
+              <div class="product-card__media">
+                {%- if block.settings.image != blank -%}
+                  <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" loading="lazy">
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="product-card__body">
+                <h3 class="product-card__title">{{ block.settings.title }}</h3>
+                {%- if block.settings.description != blank -%}
+                  <p class="text-muted" style="font-size:.9375rem;">{{ block.settings.description }}</p>
+                {%- endif -%}
+                <div class="product-card__price">
+                  <span>{{ block.settings.price }}</span>
+                </div>
+                <span class="product-card__cta btn btn--primary btn--sm">
+                  {{ block.settings.cta_label | default: 'Get started' }}
+                  {% render 'icon', icon: 'arrow-right' %}
+                </span>
+              </div>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Trusted by experts"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Trusted by experts, priced for you."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Doctor-reviewed programs with fast, free shipping and 24/7 care — starting at just $179."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection (overrides manual blocks)"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "Product limit",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Get started"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "manual",
+      "name": "Manual product",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "GLP-1 Injections"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price text",
+          "default": "Starting at $179"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge"
+        },
+        {
+          "type": "select",
+          "id": "badge_style",
+          "label": "Badge style",
+          "options": [
+            { "value": "default", "label": "Default" },
+            { "value": "gold", "label": "Gold" }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA label",
+          "default": "Get started"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Featured products",
+      "category": "Products",
+      "blocks": [
+        { "type": "manual", "settings": { "title": "GLP-1 Injections", "price": "Starting at $179", "badge": "Popular", "badge_style": "gold" } },
+        { "type": "manual", "settings": { "title": "Semaglutide", "price": "$99/mo + medication", "description": "Doctor-prescribed compounded program." } },
+        { "type": "manual", "settings": { "title": "Tirzepatide Injection", "price": "Prescribed for $279", "badge": "Advanced" } },
+        { "type": "manual", "settings": { "title": "GLP-1 Tablets", "price": "Starting at $249", "description": "For patients who prefer a daily oral option." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

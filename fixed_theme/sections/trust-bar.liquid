@@ -1,0 +1,59 @@
+<section style="background: var(--color-sand-light); padding: 28px 0; border-top: 1px solid var(--color-border);">
+  <div class="container">
+    <div class="grid grid--4" style="gap: 20px;">
+      {%- for block in section.blocks -%}
+        <div class="flex items-center gap-md" {{ block.shopify_attributes }}>
+          <div style="width:44px;height:44px;border-radius:50%;background:var(--color-surface);display:flex;align-items:center;justify-content:center;color:var(--color-primary);box-shadow:var(--shadow-sm);">
+            {% render 'icon', icon: block.settings.icon %}
+          </div>
+          <div>
+            <strong style="display:block;">{{ block.settings.heading }}</strong>
+            <small class="text-muted">{{ block.settings.text }}</small>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust bar",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "shield",
+          "options": [
+            { "value": "shield", "label": "Shield / Guarantee" },
+            { "value": "truck", "label": "Shipping" },
+            { "value": "stethoscope", "label": "Doctor" },
+            { "value": "chat", "label": "Support" },
+            { "value": "heart", "label": "Care" }
+          ]
+        },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "MEDVi Guarantee" },
+        { "type": "text", "id": "text", "label": "Subtext", "default": "Risk-free, confidence-first." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "default": {
+    "blocks": [
+      { "type": "item", "settings": { "icon": "shield", "heading": "MEDVi Guarantee", "text": "Risk-free, confidence-first." } },
+      { "type": "item", "settings": { "icon": "stethoscope", "heading": "Board-certified doctors", "text": "Every plan reviewed by a clinician." } },
+      { "type": "item", "settings": { "icon": "truck", "heading": "Fast, free shipping", "text": "Direct to your door." } },
+      { "type": "item", "settings": { "icon": "chat", "heading": "24/7 live support", "text": "Unlimited messaging & appointments." } }
+    ]
+  },
+  "presets": [{ "name": "Trust bar", "category": "Trust" }],
+  "enabled_on": {
+    "groups": ["footer", "*"]
+  }
+}
+{% endschema %}

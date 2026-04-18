@@ -1,0 +1,181 @@
+<section class="hero">
+  <div class="container">
+    <div class="hero__grid">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow hero__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h1 class="fade-in-up">{{ section.settings.heading }}</h1>
+        <p class="hero__lede fade-in-up">{{ section.settings.subheading }}</p>
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="check-list mb-md">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'benefit' -%}
+                <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        <div class="hero__ctas">
+          <a href="{{ section.settings.primary_link | default: routes.all_products_collection_url }}" class="btn btn--secondary btn--lg">
+            {{ section.settings.primary_label | default: "I'm ready — Let's go" }}
+            {% render 'icon', icon: 'arrow-right' %}
+          </a>
+          {%- if section.settings.secondary_label != blank -%}
+            <a href="{{ section.settings.secondary_link }}" class="btn btn--ghost btn--lg">
+              {{ section.settings.secondary_label }}
+            </a>
+          {%- endif -%}
+        </div>
+
+        <div class="hero__trust">
+          <div class="stars" aria-label="5 out of 5 stars"></div>
+          <div>
+            <strong>{{ section.settings.trust_number | default: '500,000+' }}</strong>
+            <span>{{ section.settings.trust_label | default: 'patients trust MEDVi' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__collage" aria-hidden="true">
+        {%- if section.settings.badge_text != blank -%}
+          <span class="hero__badge">{{ section.settings.badge_text }}</span>
+        {%- endif -%}
+        {%- assign tile_count = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'image' -%}
+            {%- assign tile_count = tile_count | plus: 1 -%}
+            {%- if tile_count <= 5 -%}
+              <img class="tile-{{ tile_count }}" src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.image.alt | default: 'MEDVi patient' | escape }}" loading="eager" {{ block.shopify_attributes }}>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if tile_count == 0 -%}
+          <img class="tile-1" src="{{ 'hero-grid-2.jpg' | asset_url }}" alt="MEDVi patient">
+          <img class="tile-2" src="{{ 'hero-grid-3.jpg' | asset_url }}" alt="MEDVi patient">
+          <img class="tile-3" src="{{ 'hero-grid-4.jpg' | asset_url }}" alt="MEDVi patient">
+          <div class="tile-4"></div>
+          <img class="tile-5" src="{{ 'hero-grid-6b.jpg' | asset_url }}" alt="MEDVi patient">
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Doctor-approved · 24/7 support"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Finally serious about weight loss? Shed your fat with personalized care and GLP-1 medication."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Find the right GLP-1 medication with the confidence that comes from knowing it is doctor-approved and budget-friendly."
+    },
+    {
+      "type": "header",
+      "content": "Primary CTA"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Label",
+      "default": "I'm ready — Let's go"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary CTA"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Label",
+      "default": "See how it works"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Trust signal"
+    },
+    {
+      "type": "text",
+      "id": "trust_number",
+      "label": "Number",
+      "default": "500,000+"
+    },
+    {
+      "type": "text",
+      "id": "trust_label",
+      "label": "Label",
+      "default": "patients trust MEDVi"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Image badge",
+      "default": "Start for $179"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Hero image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 9,
+  "default": {
+    "blocks": [
+      { "type": "benefit", "settings": { "text": "MEDVi Guarantee — the only thing you'll lose is extra weight." } },
+      { "type": "benefit", "settings": { "text": "Start for just $179 — no long-term contract." } },
+      { "type": "benefit", "settings": { "text": "24/7 support from licensed providers, included." } }
+    ]
+  },
+  "presets": [
+    {
+      "name": "Hero",
+      "category": "Introduction"
+    }
+  ]
+}
+{% endschema %}

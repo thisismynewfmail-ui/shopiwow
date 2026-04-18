@@ -1,0 +1,49 @@
+<section class="section">
+  <div class="container">
+    <header class="flex justify-between items-center flex-wrap gap-md mb-lg">
+      <div>
+        <span class="eyebrow">{{ 'customer.account.title' | t }}</span>
+        <h1 class="mt-sm mb-0">Hi, {{ customer.first_name | default: customer.email }}</h1>
+      </div>
+      <a href="{{ routes.account_logout_url }}" class="btn btn--outline">{{ 'customer.log_out' | t }}</a>
+    </header>
+
+    <div class="grid grid--2" style="align-items: start;">
+      <section class="card">
+        <h2>{{ 'customer.orders.title' | t }}</h2>
+        {%- if customer.orders.size > 0 -%}
+          <table style="width:100%; border-collapse: collapse; margin-top: 16px;">
+            <thead>
+              <tr style="text-align:left; font-size:.8125rem; text-transform:uppercase; letter-spacing:.08em; color:var(--color-text-muted);">
+                <th style="padding:10px 0;">{{ 'customer.orders.order_number' | t }}</th>
+                <th style="padding:10px 0;">{{ 'customer.orders.date' | t }}</th>
+                <th style="padding:10px 0; text-align:right;">{{ 'customer.orders.total' | t }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for order in customer.orders -%}
+                <tr style="border-top: 1px solid var(--color-border);">
+                  <td style="padding:14px 0;"><a href="{{ order.customer_url }}" style="font-weight:600;">{{ order.name }}</a></td>
+                  <td style="padding:14px 0;">{{ order.created_at | date: '%b %d, %Y' }}</td>
+                  <td style="padding:14px 0; text-align:right;">{{ order.total_price | money }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        {%- else -%}
+          <p class="text-muted">{{ 'customer.orders.none' | t }}</p>
+        {%- endif -%}
+      </section>
+
+      <section class="card">
+        <h2>{{ 'customer.account.details' | t }}</h2>
+        {%- if customer.default_address -%}
+          <address style="font-style:normal; line-height:1.6;">
+            {{ customer.default_address | format_address }}
+          </address>
+        {%- endif -%}
+        <a href="{{ routes.account_addresses_url }}" class="btn btn--outline btn--sm mt-md">{{ 'customer.account.view_addresses' | t }}</a>
+      </section>
+    </div>
+  </div>
+</section>

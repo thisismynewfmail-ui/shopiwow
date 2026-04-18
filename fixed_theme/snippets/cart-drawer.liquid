@@ -1,0 +1,51 @@
+{%- if settings.cart_type == 'drawer' -%}
+  <aside class="cart-drawer" data-cart-drawer aria-hidden="true" role="dialog" aria-label="{{ 'sections.cart.title' | t }}">
+    <div class="cart-drawer__header">
+      <h2 class="mb-0">{{ 'sections.cart.title' | t }}</h2>
+      <button type="button" class="slideout__close" data-cart-close aria-label="{{ 'general.accessibility.close' | t }}">
+        {% render 'icon', icon: 'close' %}
+      </button>
+    </div>
+    <div class="cart-drawer__body" data-cart-items>
+      {%- if cart.item_count > 0 -%}
+        {%- for item in cart.items -%}
+          <div class="cart-item" data-cart-line="{{ forloop.index }}">
+            <div class="cart-item__image">
+              {%- if item.image -%}
+                <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" loading="lazy">
+              {%- endif -%}
+            </div>
+            <div>
+              <div class="cart-item__title">{{ item.product.title }}</div>
+              {%- if item.variant.title != 'Default Title' -%}
+                <div class="cart-item__meta">{{ item.variant.title }}</div>
+              {%- endif -%}
+              <div class="cart-item__meta">Qty {{ item.quantity }}</div>
+              <a href="{{ item.url_to_remove }}" class="cart-item__remove">Remove</a>
+            </div>
+            <div class="cart-item__price">{{ item.final_line_price | money }}</div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="cart-drawer__empty">
+          <h3>{{ 'sections.cart.empty' | t }}</h3>
+          <a href="{{ routes.all_products_collection_url }}" class="btn btn--outline mt-md">{{ 'general.continue_shopping' | t }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+    {%- if cart.item_count > 0 -%}
+      <div class="cart-drawer__footer">
+        <div class="flex justify-between mb-sm">
+          <strong>{{ 'sections.cart.estimated_total' | t }}</strong>
+          <strong>{{ cart.total_price | money }}</strong>
+        </div>
+        <p class="text-muted" style="font-size:.8125rem;">Taxes and shipping calculated at checkout.</p>
+        <form action="{{ routes.cart_url }}" method="post">
+          <button type="submit" name="checkout" class="btn btn--primary btn--block btn--lg">
+            {{ 'sections.cart.checkout' | t }}
+          </button>
+        </form>
+      </div>
+    {%- endif -%}
+  </aside>
+{%- endif -%}

@@ -1,0 +1,131 @@
+<header class="site-header" data-site-header>
+  <div class="container site-header__inner">
+    <a href="{{ routes.root_url }}" class="site-header__logo" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo != blank -%}
+        <img
+          src="{{ section.settings.logo | image_url: width: 420 }}"
+          alt="{{ shop.name | escape }}"
+          width="{{ section.settings.logo.width }}"
+          height="{{ section.settings.logo.height }}"
+          style="max-width: {{ section.settings.logo_width }}px;">
+      {%- elsif settings.logo != blank -%}
+        <img
+          src="{{ settings.logo | image_url: width: 420 }}"
+          alt="{{ shop.name | escape }}"
+          style="max-width: {{ settings.logo_width }}px;">
+      {%- else -%}
+        <span style="font-family:var(--font-heading); font-weight:800; font-size:1.5rem; color:var(--color-primary);">
+          {{ shop.name }}
+        </span>
+      {%- endif -%}
+    </a>
+
+    <nav class="site-header__nav" aria-label="Primary">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="site-header__actions">
+      {%- if section.settings.show_cta -%}
+        <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="btn btn--primary hidden-sm">
+          {{ section.settings.cta_label | default: 'Get started' }}
+        </a>
+      {%- endif -%}
+
+      <a href="{{ routes.search_url }}" class="header-cart" aria-label="{{ 'general.search.search' | t }}">
+        {% render 'icon', icon: 'search' %}
+      </a>
+
+      <a href="{{ routes.cart_url }}" class="header-cart" aria-label="{{ 'sections.cart.title' | t }}" data-cart-toggle>
+        {% render 'icon', icon: 'cart' %}
+        <span class="header-cart__count" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+
+      <button type="button" class="burger" aria-label="{{ 'general.accessibility.menu' | t }}" data-menu-toggle aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<aside class="slideout" data-slideout aria-hidden="true" role="dialog" aria-label="Mobile navigation">
+  <div class="slideout__header">
+    {%- if section.settings.logo != blank -%}
+      <img src="{{ section.settings.logo | image_url: width: 320 }}" alt="{{ shop.name | escape }}" style="max-width: 160px;">
+    {%- elsif settings.logo != blank -%}
+      <img src="{{ settings.logo | image_url: width: 320 }}" alt="{{ shop.name | escape }}" style="max-width: 160px;">
+    {%- else -%}
+      <strong>{{ shop.name }}</strong>
+    {%- endif -%}
+    <button type="button" class="slideout__close" data-menu-close aria-label="{{ 'general.accessibility.close' | t }}">
+      {% render 'icon', icon: 'close' %}
+    </button>
+  </div>
+  <nav class="slideout__nav" aria-label="Mobile">
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}">
+        <span>{{ link.title }}</span>
+        {% render 'icon', icon: 'arrow-right' %}
+      </a>
+    {%- endfor -%}
+  </nav>
+  <div class="slideout__footer">
+    <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="btn btn--primary btn--block">
+      {{ section.settings.cta_label | default: 'Get started' }}
+    </a>
+  </div>
+</aside>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo override"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 80,
+      "max": 260,
+      "step": 10,
+      "default": 180,
+      "unit": "px",
+      "label": "Logo width"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Header CTA"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show header CTA button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Get started"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

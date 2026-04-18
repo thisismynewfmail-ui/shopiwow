@@ -1,0 +1,40 @@
+<section class="section">
+  <div class="container">
+    <header class="mb-lg">
+      <a href="{{ routes.account_url }}" class="text-muted" style="font-size:.875rem;">← {{ 'customer.account.return' | t }}</a>
+      <h1 class="mt-sm">{{ 'customer.order.title' | t: name: order.name }}</h1>
+      <p class="text-muted">{{ 'customer.order.date_html' | t: date: order.created_at | date: '%b %d, %Y' }}</p>
+    </header>
+
+    <div class="grid grid--2" style="align-items: start;">
+      <section class="card">
+        <h2>Items</h2>
+        {%- for line_item in order.line_items -%}
+          <div class="cart-item">
+            <div class="cart-item__image">
+              {%- if line_item.image -%}
+                <img src="{{ line_item.image | image_url: width: 160 }}" alt="{{ line_item.title | escape }}">
+              {%- endif -%}
+            </div>
+            <div>
+              <div class="cart-item__title">{{ line_item.title }}</div>
+              <div class="cart-item__meta">Qty {{ line_item.quantity }}</div>
+            </div>
+            <div><strong>{{ line_item.final_line_price | money }}</strong></div>
+          </div>
+        {%- endfor -%}
+        <div class="flex justify-between mt-md" style="padding-top: 16px; border-top: 1px solid var(--color-border);">
+          <strong>{{ 'customer.order.total' | t }}</strong>
+          <strong>{{ order.total_price | money }}</strong>
+        </div>
+      </section>
+
+      <aside class="card">
+        <h3>{{ 'customer.order.shipping_address' | t }}</h3>
+        <address style="font-style:normal; line-height:1.6;">{{ order.shipping_address | format_address }}</address>
+        <p class="mt-md"><strong>{{ 'customer.order.fulfillment_status' | t }}:</strong> {{ order.fulfillment_status_label }}</p>
+        <p><strong>{{ 'customer.order.payment_status' | t }}:</strong> {{ order.financial_status_label }}</p>
+      </aside>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,106 @@
+{
+  "settings_schema": {
+    "colors": {
+      "name": "Colors",
+      "settings": {
+        "background": {
+          "label": "Background"
+        },
+        "text": {
+          "label": "Text"
+        },
+        "primary_button": {
+          "label": "Primary button"
+        },
+        "primary_button_label": {
+          "label": "Primary button text"
+        },
+        "secondary_button": {
+          "label": "Secondary button"
+        },
+        "secondary_button_label": {
+          "label": "Secondary button text"
+        },
+        "accent": {
+          "label": "Accent"
+        }
+      }
+    },
+    "typography": {
+      "name": "Typography",
+      "settings": {
+        "heading_font": {
+          "label": "Heading font"
+        },
+        "body_font": {
+          "label": "Body font"
+        },
+        "heading_scale": {
+          "label": "Heading scale"
+        },
+        "body_scale": {
+          "label": "Body scale"
+        }
+      }
+    },
+    "layout": {
+      "name": "Layout",
+      "settings": {
+        "page_width": {
+          "label": "Page width"
+        },
+        "section_spacing": {
+          "label": "Section spacing"
+        },
+        "card_border_radius": {
+          "label": "Card corner radius"
+        }
+      }
+    },
+    "social": {
+      "name": "Social media",
+      "settings": {
+        "social_facebook_link": {
+          "label": "Facebook"
+        },
+        "social_instagram_link": {
+          "label": "Instagram"
+        },
+        "social_twitter_link": {
+          "label": "Twitter"
+        },
+        "social_youtube_link": {
+          "label": "YouTube"
+        },
+        "social_tiktok_link": {
+          "label": "TikTok"
+        }
+      }
+    },
+    "favicon": {
+      "name": "Favicon",
+      "settings": {
+        "favicon": {
+          "label": "Favicon image"
+        }
+      }
+    },
+    "cart": {
+      "name": "Cart",
+      "settings": {
+        "cart_type": {
+          "label": "Cart type",
+          "options__1": {
+            "label": "Drawer"
+          },
+          "options__2": {
+            "label": "Page"
+          }
+        },
+        "show_cart_note": {
+          "label": "Enable cart note"
+        }
+      }
+    }
+  }
+}

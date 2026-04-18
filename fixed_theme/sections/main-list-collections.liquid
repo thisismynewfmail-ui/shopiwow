@@ -1,0 +1,30 @@
+<section class="section">
+  <div class="container">
+    <header class="section-header">
+      <span class="eyebrow">Shop</span>
+      <h1 class="mt-sm">{{ page_title }}</h1>
+    </header>
+
+    <div class="grid grid--3">
+      {%- for collection in collections -%}
+        <a href="{{ collection.url }}" class="card">
+          {%- if collection.featured_image -%}
+            <img src="{{ collection.featured_image | image_url: width: 800 }}" alt="{{ collection.title | escape }}" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; margin-bottom:16px;" loading="lazy">
+          {%- endif -%}
+          <h3>{{ collection.title }}</h3>
+          {%- if collection.description != blank -%}
+            <p class="text-muted">{{ collection.description | strip_html | truncatewords: 18 }}</p>
+          {%- endif -%}
+          <span class="text-primary" style="font-weight:600;">Shop now →</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections list",
+  "settings": []
+}
+{% endschema %}

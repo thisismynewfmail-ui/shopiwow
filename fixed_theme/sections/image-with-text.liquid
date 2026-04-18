@@ -1,0 +1,44 @@
+<section class="section">
+  <div class="container">
+    <div class="grid grid--2" style="align-items: center; gap: 48px;{% if section.settings.reverse %} direction: rtl;{% endif %}">
+      <div class="reveal" style="direction:ltr;">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 900 }}"
+            alt="{{ section.settings.heading | escape }}"
+            style="width: 100%; border-radius: var(--card-radius); box-shadow: var(--shadow-md);"
+            loading="lazy">
+        {%- endif -%}
+      </div>
+      <div style="direction:ltr;">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h2 class="mt-sm">{{ section.settings.heading }}</h2>
+        <div class="rte">{{ section.settings.text }}</div>
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="btn btn--primary mt-md">
+            {{ section.settings.cta_label }}
+            {% render 'icon', icon: 'arrow-right' %}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image with text",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Metabolic science" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "We will fix your broken metabolism." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>It's not magic—it's metabolic science. GLP-1 is a naturally occurring hormone that regulates appetite and blood sugar, improving your metabolism and knocking out cravings.</p><p>Join the over 500,000 MEDVi patients and we'll help you finally get real, lasting results.</p>" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "checkbox", "id": "reverse", "label": "Reverse layout", "default": false },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Get started" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "presets": [{ "name": "Image with text", "category": "Content" }]
+}
+{% endschema %}

@@ -1,0 +1,67 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": { "type": "vendor" },
+        "title": { "type": "title" },
+        "rating": { "type": "rating", "settings": { "rating_count": "4,800+ verified reviews" } },
+        "price": { "type": "price" },
+        "description": { "type": "description" },
+        "checklist": {
+          "type": "checklist",
+          "settings": {
+            "item_1": "Doctor-reviewed, personalized plan",
+            "item_2": "Unlimited 24/7 messaging with your care team",
+            "item_3": "Free, fast shipping — direct from a US pharmacy",
+            "item_4": "No contracts, no hidden fees, cancel any time"
+          }
+        },
+        "variant_picker": { "type": "variant_picker" },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "cta_label": "Start my plan",
+            "subtext": "First month $179 · no contract · cancel any time."
+          }
+        },
+        "benefits": { "type": "benefits" }
+      },
+      "block_order": ["vendor", "title", "rating", "price", "description", "checklist", "variant_picker", "buy_buttons", "benefits"]
+    },
+    "reviews": {
+      "type": "testimonials",
+      "settings": {
+        "eyebrow": "Patient stories",
+        "heading": "Real MEDVi patients. Real results.",
+        "subheading": "Every review is from a verified patient."
+      },
+      "blocks": {
+        "t1": { "type": "review", "settings": { "name": "Belinda", "quote": "Slowly and surely reaching my goals with MEDVi's help. They have been very attentive and provided me with all the resources to be successful." } },
+        "t2": { "type": "review", "settings": { "name": "Greg", "quote": "I was ready to give up. Wow. I would pay 10x as much. Thanks to MEDVi for the metabolic fix — game changer." } },
+        "t3": { "type": "review", "settings": { "name": "Melissa", "quote": "Losing weight without a crazy diet, without cardio — it just felt like magic. I was a snacker, but not anymore." } }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+    "guarantee": {
+      "type": "guarantee",
+      "settings": {
+        "eyebrow": "MEDVi Guarantee",
+        "heading": "The only thing you'll lose is extra weight.",
+        "text": "With over 500,000+ patients, we're confident you will reach your goal with our personalized program.",
+        "cta_label": "Continue with confidence"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": { "eyebrow": "Frequently asked", "heading": "Your questions, answered." },
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "How soon will I see results?", "answer": "<p>Most patients see changes within the first 4 weeks. MEDVi patients typically lose 1-2 lbs per week after the first month, with 15–20% body weight loss on average over the full program.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "Are side effects common?", "answer": "<p>Like any medication, GLP-1s can have side effects — most commonly mild nausea or digestive changes that fade after the first weeks. Your clinician will guide dose titration to minimize them.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "How is this shipped?", "answer": "<p>Fast, free shipping direct from a licensed US pharmacy to your door in discreet packaging.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3"]
+    }
+  },
+  "order": ["main", "reviews", "guarantee", "faq"]
+}

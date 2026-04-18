@@ -1,0 +1,101 @@
+<section class="section" id="journey">
+  <div class="container">
+    <div class="section-header">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h2 class="mt-sm">{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p>{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="journey">
+      {%- for block in section.blocks -%}
+        <article class="journey__step reveal" {{ block.shopify_attributes }}>
+          <div class="journey__media">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.heading | escape }}" loading="lazy">
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="journey__body">
+            <div class="journey__number">{{ forloop.index }}</div>
+            <h3>{{ block.settings.heading }}</h3>
+            <p class="text-muted">{{ block.settings.text }}</p>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.cta_label != blank -%}
+      <div class="text-center mt-lg">
+        <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="btn btn--primary btn--lg">
+          {{ section.settings.cta_label }}
+          {% render 'icon', icon: 'arrow-right' %}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Journey / How it works",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "What to expect"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Begin your weight loss journey with MEDVi."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Three simple steps from sign-up to your first dose — no commitment, cancel any time."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Get approved in minutes"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Get Approved" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Complete a quick online evaluation. Our team of licensed professionals will review your information and respond quickly." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Journey",
+      "category": "Content",
+      "blocks": [
+        { "type": "step", "settings": { "heading": "Get Approved", "text": "Complete a quick online evaluation to determine if GLP-1 medication is right for you. Our team of licensed professionals will review your information and provide approval in no time." } },
+        { "type": "step", "settings": { "heading": "Get Prescribed", "text": "Once approved, you'll receive personalized care and a prescription to support your weight loss and health goals. Your plan is designed for lasting results, safely and effectively." } },
+        { "type": "step", "settings": { "heading": "Receive Your Rx", "text": "Your medication is shipped directly to your door for maximum convenience. Starting is as simple as opening your package and following our easy-to-use instructions." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
